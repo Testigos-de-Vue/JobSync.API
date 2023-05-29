@@ -22,6 +22,7 @@
       <Folder Include="Authentication\Interfaces\Internal\" />
       <Folder Include="Authentication\Interfaces\Rest\Controllers\" />
       <Folder Include="Authentication\Mapping\" />
+      <Folder Include="Authentication\Persistence\Repositories\" />
       <Folder Include="Authentication\Resources\" />
       <Folder Include="Authentication\Services\" />
     </ItemGroup>
