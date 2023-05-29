@@ -18,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Authentication\Domain\Services\" />
       <Folder Include="Authentication\Interfaces\Internal\" />
       <Folder Include="Authentication\Interfaces\Rest\Controllers\" />
       <Folder Include="Authentication\Mapping\" />
