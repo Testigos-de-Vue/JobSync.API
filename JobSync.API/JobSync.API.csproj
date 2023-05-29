@@ -17,4 +17,14 @@
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Authentication\Domain\Repositories\" />
+      <Folder Include="Authentication\Domain\Services\" />
+      <Folder Include="Authentication\Interfaces\Internal\" />
+      <Folder Include="Authentication\Interfaces\Rest\Controllers\" />
+      <Folder Include="Authentication\Mapping\" />
+      <Folder Include="Authentication\Resources\" />
+      <Folder Include="Authentication\Services\" />
+    </ItemGroup>
+
 </Project>
