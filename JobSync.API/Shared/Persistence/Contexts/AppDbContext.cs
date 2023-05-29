@@ -26,6 +26,9 @@ public class AppDbContext : DbContext
     builder.Entity<User>().Property(u => u.Email).IsRequired().HasMaxLength(64);
     builder.Entity<User>().Property(u => u.ImageUrl).IsRequired().HasMaxLength(256);
     builder.Entity<User>().Property(u => u.Password).IsRequired();
+    builder.Entity<User>().Property(u => u.IsSubscribedToNewsletter).IsRequired();
+    builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
+    
     
     // Apply Snake Case Naming Convention
     builder.UseSnakeCaseNamingConvention();
