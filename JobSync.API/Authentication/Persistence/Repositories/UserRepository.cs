@@ -38,4 +38,9 @@ public class UserRepository : BaseRepository, IUserRepository
   {
     Context.Users.Update(user);
   }
+
+  public void Remove(User user)
+  {
+    Context.Remove(user);
+  }
 }
