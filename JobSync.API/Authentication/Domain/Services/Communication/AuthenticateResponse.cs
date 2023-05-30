@@ -1,11 +1,15 @@
-﻿namespace JobSync.API.Authentication.Domain.Services.Communication;
+﻿using JobSync.API.Authentication.Resources;
+using JobSync.API.Shared.Domain.Services.Communication;
 
-public class AuthenticateResponse
+namespace JobSync.API.Authentication.Domain.Services.Communication;
+
+public class AuthenticateResponse : BaseResponse<UserResource>
 {
-  public int Id { get; set; }
-  public string Name { get; set; }
-  public string LastName { get; set; }
-  public string Email { get; set; }
-  public string ImageUrl { get; set; }
-  public string Token { get; set; }
+  public AuthenticateResponse(string message) : base(message)
+  {
+  }
+
+  public AuthenticateResponse(UserResource resource) : base(resource)
+  {
+  }
 }
