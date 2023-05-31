@@ -1,6 +1,6 @@
 using AutoMapper;
-using JobSync.API.Activity.Domain.Models;
 using JobSync.API.Activity.Resources;
+using JobSync.API.Activity.Domain.Models;
 
 namespace JobSync.API.Activity.Mapping;
 
