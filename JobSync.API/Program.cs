@@ -33,8 +33,8 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Authentication Bounded Context Injection Configuration
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
