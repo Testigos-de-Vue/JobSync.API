@@ -19,12 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Activity\Domain\Services\" />
-      <Folder Include="Authentication\Interfaces\Internal\" />
-      <Folder Include="Authentication\Interfaces\Rest\Controllers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Compile Remove="Activities\Mapping\ResourceToTaskProfile.cs" />
       <Compile Remove="Activities\Mapping\TaskToResourceProfile.cs" />
     </ItemGroup>

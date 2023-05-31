@@ -1,4 +1,5 @@
-﻿using JobSync.API.Authentication.Domain.Models;
+﻿using JobSync.API.Activity.Domain.Models;
+using JobSync.API.Authentication.Domain.Models;
 using JobSync.API.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,8 @@ namespace JobSync.API.Shared.Persistence.Contexts;
 public class AppDbContext : DbContext
 {
   public DbSet<User> Users { get; set; }
-  
+  public DbSet<TaskItem> TaskItems {get; set;}
+
   public AppDbContext(DbContextOptions options) : base(options)
   {
   }
