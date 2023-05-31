@@ -10,5 +10,4 @@ public interface ITaskRepository
     Task<TaskItem> FindByTitleAsync(string title);
     void Update(TaskItem taskItem);
     void Remove(TaskItem taskItem);
-    
 }
