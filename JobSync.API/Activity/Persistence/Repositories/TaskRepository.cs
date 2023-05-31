@@ -43,5 +43,4 @@ public class TaskRepository :BaseRepository, ITaskRepository
     {
         Context.TaskItems.Remove(taskItem);
     }
-    
 }
