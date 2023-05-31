@@ -1,9 +1,8 @@
 ﻿using JobSync.API.Authentication.Domain.Services.Communication;
-using JobSync.API.Authentication.Resources;
 
 namespace JobSync.API.Authentication.Domain.Services;
 
 public interface IAuthenticationService
 {
-  Task<UserResponse> Authenticate(AuthenticateRequest request);
+  Task<AuthenticateResponse> Authenticate(AuthenticateRequest request);
 }

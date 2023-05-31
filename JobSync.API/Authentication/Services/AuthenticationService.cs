@@ -16,19 +16,30 @@ public class AuthenticationService : IAuthenticationService
     _userRepository = userRepository;
   }
 
-  public async Task<UserResponse> Authenticate(AuthenticateRequest request)
+  public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
   {
     var existingUser = await _userRepository.FindByEmailAsync(request.Email);
 
     if (existingUser == null)
-      return new UserResponse("No account was found associated with that email");
+      throw new Exception("No account was found associated with that email");
 
-    string hashedPassword = _passwordHashingService.GetHash(request.Password);
-    bool isValidPassword = _passwordHashingService.VerifyPassword(existingUser.Password, hashedPassword);
+    var hashedPassword = _passwordHashingService.GetHash(request.Password);
+    var isValidPassword = _passwordHashingService.VerifyPassword(existingUser.Password, hashedPassword);
 
     if (!isValidPassword)
-      return new UserResponse("Invalid email and password combination");
-    
-    return new UserResponse(existingUser);
+      throw new Exception("Invalid email and password combination");
+
+    var response = new AuthenticateResponse
+    {
+      Id = existingUser.Id,
+      Email = existingUser.Email,
+      Name = existingUser.Name,
+      LastName = existingUser.LastName,
+      ImageUrl = existingUser.ImageUrl,
+      // TODO: Implement JWT
+      Token = "JSON_WEB_TOKEN_PLACEHOLDER"
+    };
+
+    return response;
   }
 }
