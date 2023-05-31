@@ -1,4 +1,4 @@
-﻿using JobSync.API.Activity.Domain.Models;
+using JobSync.API.Activity.Domain.Models;
 using JobSync.API.Activity.Domain.Repositories;
 using JobSync.API.Activity.Domain.Services;
 using JobSync.API.Activity.Domain.Services.Communication;
