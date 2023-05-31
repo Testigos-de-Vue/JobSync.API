@@ -1,4 +1,4 @@
-﻿using JobSync.API.Authentication.Resources;
+using JobSync.API.Authentication.Resources;
 
 namespace JobSync.API.Activity.Resources;
 
