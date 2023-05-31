@@ -1,4 +1,5 @@
-﻿using JobSync.API.Authentication.Domain.Models;
+﻿using JobSync.API.Activity.Domain.Models;
+using JobSync.API.Authentication.Domain.Models;
 using JobSync.API.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,8 @@ namespace JobSync.API.Shared.Persistence.Contexts;
 public class AppDbContext : DbContext
 {
   public DbSet<User> Users { get; set; }
-  
+  public DbSet<TaskItem> TaskItems {get; set;}
+
   public AppDbContext(DbContextOptions options) : base(options)
   {
   }
@@ -28,6 +30,12 @@ public class AppDbContext : DbContext
     builder.Entity<User>().Property(u => u.Password).IsRequired();
     builder.Entity<User>().Property(u => u.IsSubscribedToNewsletter).IsRequired();
     builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
+    
+    //TaskItems Configuration
+    builder.Entity<TaskItem>().Property(t=>t.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<TaskItem>().Property(t=>t.Description).IsRequired().HasMaxLength(64);
+    builder.Entity<TaskItem>().Property(t=>t.Date).IsRequired();
+    
     
     
     // Apply Snake Case Naming Convention

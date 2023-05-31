@@ -1,3 +1,4 @@
+
 ﻿using System.Net.Mime;
 using JobSync.API.Authentication.Domain.Services;
 using JobSync.API.Authentication.Domain.Services.Communication;
@@ -33,3 +34,4 @@ public class AuthenticationsController : ControllerBase
     }
   }
 }
+

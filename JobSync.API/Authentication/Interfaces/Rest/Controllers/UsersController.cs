@@ -1,4 +1,5 @@
-﻿using System.Net.Mime;
+using System.Net.Mime;
+
 using AutoMapper;
 using JobSync.API.Authentication.Domain.Models;
 using JobSync.API.Authentication.Domain.Services;
@@ -78,4 +79,5 @@ public class UsersController : ControllerBase
     
     return Ok(userResource);
   }
+
 }
