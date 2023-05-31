@@ -19,8 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Activities\Mapping\ResourceToTaskProfile.cs" />
-      <Compile Remove="Activities\Mapping\TaskToResourceProfile.cs" />
+      <Folder Include="Authentication\Interfaces\Internal\" />
     </ItemGroup>
 
 </Project>
