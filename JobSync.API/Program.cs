@@ -1,3 +1,7 @@
+using JobSync.API.Authentication.Domain.Repositories;
+using JobSync.API.Authentication.Domain.Services;
+using JobSync.API.Authentication.Persistence.Repositories;
+using JobSync.API.Authentication.Services;
 using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
@@ -25,8 +29,13 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Dependency Injection Configuration
-// Shared Bounded Contexts Injection Configuration
+// Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Authentication Bounded Context Injection Configuration
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 // Application Build
 var app = builder.Build();
