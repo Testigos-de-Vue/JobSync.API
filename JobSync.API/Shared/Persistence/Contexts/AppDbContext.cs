@@ -31,6 +31,12 @@ public class AppDbContext : DbContext
     builder.Entity<User>().Property(u => u.IsSubscribedToNewsletter).IsRequired();
     builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
     
+    //TaskItems Configuration
+    builder.Entity<TaskItem>().Property(t=>t.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<TaskItem>().Property(t=>t.Description).IsRequired().HasMaxLength(64);
+    builder.Entity<TaskItem>().Property(t=>t.Date).IsRequired();
+    
+    
     
     // Apply Snake Case Naming Convention
     builder.UseSnakeCaseNamingConvention();
