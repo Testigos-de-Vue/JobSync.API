@@ -1,16 +1,16 @@
-﻿using JobSync.API.Authentication.Domain.Services;
+﻿using JobSync.API.Authentication.Domain.Repositories;
+using JobSync.API.Authentication.Domain.Services;
 using JobSync.API.Authentication.Domain.Services.Communication;
 using JobSync.API.Authentication.Persistence.Repositories;
-using JobSync.API.Authentication.Resources;
 
 namespace JobSync.API.Authentication.Services;
 
 public class AuthenticationService : IAuthenticationService
 {
-  private readonly PasswordHashingService _passwordHashingService;
-  private readonly UserRepository _userRepository;
+  private readonly IPasswordHashingService _passwordHashingService;
+  private readonly IUserRepository _userRepository;
 
-  public AuthenticationService(PasswordHashingService passwordHashingService, UserRepository userRepository)
+  public AuthenticationService(IPasswordHashingService passwordHashingService, IUserRepository userRepository)
   {
     _passwordHashingService = passwordHashingService;
     _userRepository = userRepository;

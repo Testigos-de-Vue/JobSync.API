@@ -33,10 +33,16 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Authentication Bounded Context Injection Configuration
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+// AutoMapper Configuration
+builder.Services.AddAutoMapper(
+  typeof(JobSync.API.Authentication.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
+);
 
 // Application Build
 var app = builder.Build();
