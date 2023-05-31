@@ -12,12 +12,10 @@ namespace JobSync.API.Authentication.Interfaces.Rest.Controllers;
 public class AuthenticationsController : ControllerBase
 {
   private readonly IAuthenticationService _authenticationService;
-  private readonly IPasswordHashingService _passwordHashingService;
 
-  public AuthenticationsController(IAuthenticationService authenticationService, IPasswordHashingService passwordHashingService)
+  public AuthenticationsController(IAuthenticationService authenticationService)
   {
     _authenticationService = authenticationService;
-    _passwordHashingService = passwordHashingService;
   }
 
   [HttpPost]
@@ -25,7 +23,7 @@ public class AuthenticationsController : ControllerBase
   {
     try
     {
-      var response = _authenticationService.Authenticate(request);
+      var response = await _authenticationService.Authenticate(request);
       return Ok(Response);
     }
     catch (Exception e)
