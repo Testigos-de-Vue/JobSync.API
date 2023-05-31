@@ -38,6 +38,12 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
+// AutoMapper Configuration
+builder.Services.AddAutoMapper(
+  typeof(JobSync.API.Authentication.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
+);
+
 // Application Build
 var app = builder.Build();
 
