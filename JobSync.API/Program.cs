@@ -1,5 +1,6 @@
 using JobSync.API.Activity.Domain.Repositories;
 using JobSync.API.Activity.Domain.Services;
+using JobSync.API.Activity.Persistence.Repositories;
 using JobSync.API.Activity.Services;
 using JobSync.API.Authentication.Domain.Repositories;
 using JobSync.API.Authentication.Domain.Services;
@@ -43,7 +44,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 // Activity Bounded Context Injection Configuration
 builder.Services.AddScoped<ITaskService, TaskService>();
-builder.Services.AddScoped<ITaskRepository, ITaskRepository>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 // AutoMapper Configuration
 builder.Services.AddAutoMapper(
