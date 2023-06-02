@@ -44,6 +44,11 @@ builder.Services.AddAutoMapper(
   typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
 );
 
+builder.Services.AddAutoMapper(
+  typeof(JobSync.API.Activity.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Activity.Mapping.ResourceToModelProfile)
+);
+
 // Application Build
 var app = builder.Build();
 
