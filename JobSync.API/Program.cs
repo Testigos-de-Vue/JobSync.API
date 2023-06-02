@@ -1,3 +1,7 @@
+using JobSync.API.Activity.Domain.Repositories;
+using JobSync.API.Activity.Domain.Services;
+using JobSync.API.Activity.Persistence.Repositories;
+using JobSync.API.Activity.Services;
 using JobSync.API.Authentication.Domain.Repositories;
 using JobSync.API.Authentication.Domain.Services;
 using JobSync.API.Authentication.Persistence.Repositories;
@@ -38,10 +42,19 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
+// Activity Bounded Context Injection Configuration
+builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+
 // AutoMapper Configuration
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Authentication.Mapping.ModelToResourceProfile),
   typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
+);
+
+builder.Services.AddAutoMapper(
+  typeof(JobSync.API.Activity.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Activity.Mapping.ResourceToModelProfile)
 );
 
 // Application Build

@@ -4,9 +4,9 @@ using JobSync.API.Activity.Domain.Models;
 
 namespace JobSync.API.Activity.Mapping;
 
-public class ResourceToTaskProfile : Profile
+public class ResourceToModelProfile : Profile
 {
-    public ResourceToTaskProfile()
+    public ResourceToModelProfile()
     {
         CreateMap<TaskResource, TaskItem>(); 
     }

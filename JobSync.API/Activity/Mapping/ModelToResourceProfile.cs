@@ -2,12 +2,11 @@ using AutoMapper;
 using JobSync.API.Activity.Resources;
 using JobSync.API.Activity.Domain.Models;
 
-
 namespace JobSync.API.Activity.Mapping;
 
-public class TaskToResourceProfile : Profile
+public class ModelToResourceProfile : Profile
 {
-    public TaskToResourceProfile()
+    public ModelToResourceProfile()
     {
         CreateMap<TaskItem, TaskResource>();
     }
