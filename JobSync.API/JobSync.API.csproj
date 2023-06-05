@@ -22,7 +22,6 @@
       <Folder Include="Authentication\Interfaces\Internal\" />
       <Folder Include="Recruitment\Interfaces\Internal\" />
       <Folder Include="Recruitment\Interfaces\Rest\Controllers\" />
-      <Folder Include="Recruitment\Mapping\" />
       <Folder Include="Recruitment\Persistence\Repositories\" />
       <Folder Include="Recruitment\Services\" />
     </ItemGroup>
