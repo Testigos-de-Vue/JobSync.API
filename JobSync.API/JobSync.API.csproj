@@ -24,7 +24,6 @@
       <Folder Include="Recruitment\Interfaces\Rest\Controllers\" />
       <Folder Include="Recruitment\Mapping\" />
       <Folder Include="Recruitment\Persistence\Repositories\" />
-      <Folder Include="Recruitment\Resources\" />
       <Folder Include="Recruitment\Services\" />
     </ItemGroup>
 
