@@ -14,7 +14,7 @@ public class Phase
     public string Description { get; set; }
     public JSType.Date CreatedDate { get; set; }
     
-    public int RecruitmentId { get; set; }
+    public int ProcessId { get; set; }
     public Process Process { get; set; }
     
     public List<Candidate> Candidates { get; set; }
