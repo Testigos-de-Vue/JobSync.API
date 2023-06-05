@@ -20,7 +20,6 @@
 
     <ItemGroup>
       <Folder Include="Authentication\Interfaces\Internal\" />
-      <Folder Include="Recruitment\Domain\Repositories\" />
       <Folder Include="Recruitment\Interfaces\Internal\" />
       <Folder Include="Recruitment\Interfaces\Rest\Controllers\" />
       <Folder Include="Recruitment\Mapping\" />
