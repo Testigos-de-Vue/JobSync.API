@@ -16,6 +16,6 @@ public class CandidateProfile
     public int UserId { get; set; }
     public User User { get; set; }
 
-    public int PhaseId { get; set; }
+    public int RecruitmentPhaseId { get; set; }
     public RecruitmentPhase RecruitmentPhase { get; set; }
 }

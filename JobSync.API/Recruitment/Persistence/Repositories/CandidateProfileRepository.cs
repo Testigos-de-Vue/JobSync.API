@@ -43,6 +43,22 @@ public class CandidateProfileRepository: BaseRepository, ICandidateProfileReposi
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<CandidateProfile>> FindByUserIdAsync(int userId)
+    {
+        return await Context.CandidateProfiles
+            .Where(c => c.UserId == userId)
+            .Include(c => c.User)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<CandidateProfile>> FindByRecruitmentPhaseIdAsync(int phaseId)
+    {
+        return await Context.CandidateProfiles
+            .Where(c => c.RecruitmentPhaseId == phaseId)
+            .Include(c => c.RecruitmentPhase)
+            .ToListAsync();
+    }
+
     public void Update(CandidateProfile candidateProfile)
     {
         Context.CandidateProfiles.Update(candidateProfile);
