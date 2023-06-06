@@ -7,7 +7,7 @@ public interface ICandidateProfileRepository
     Task<IEnumerable<CandidateProfile>>ListAsync();
     Task AddAsync(CandidateProfile candidateProfile);
     Task<CandidateProfile> FindByIdAsync(int candidateId);
-    Task<CandidateProfile> FindByJobAreaAsync(int jobAreaId);
+    Task<IEnumerable<CandidateProfile>> FindByJobAreaIdAsync(int jobAreaId);
     void Update(CandidateProfile candidateProfile);
     void Remove(CandidateProfile candidateProfile);
 }
