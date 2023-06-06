@@ -2,7 +2,7 @@
 
 namespace JobSync.API.Recruitment.Resources;
 
-public class SavePhaseResource
+public class SaveRecruitmentPhaseResource
 {
     [Required]
     [MaxLength(32)]

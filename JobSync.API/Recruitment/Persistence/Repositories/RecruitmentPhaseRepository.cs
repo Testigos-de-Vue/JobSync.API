@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobSync.API.Recruitment.Persistence.Repositories;
 
-public class PhaseRepository: BaseRepository, IPhaseRepository
+public class RecruitmentPhaseRepository: BaseRepository, IRecruitmentPhaseRepository
 {
-    public PhaseRepository(AppDbContext context) : base(context)
+    public RecruitmentPhaseRepository(AppDbContext context) : base(context)
     {
     }
 
-    public async Task<IEnumerable<Phase>> ListAsync()
+    public async Task<IEnumerable<RecruitmentPhase>> ListAsync()
     {
         return await Context.Phases
             .Include(p => p.Process)
@@ -20,12 +20,12 @@ public class PhaseRepository: BaseRepository, IPhaseRepository
             .ToListAsync();
     }
 
-    public async Task AddAsync(Phase phase)
+    public async Task AddAsync(RecruitmentPhase recruitmentPhase)
     {
-        await Context.Phases.AddAsync(phase);
+        await Context.Phases.AddAsync(recruitmentPhase);
     }
 
-    public async Task<Phase> FindByIdAsync(int phaseId)
+    public async Task<RecruitmentPhase> FindByIdAsync(int phaseId)
     {
         return await Context.Phases
             .Include(p => p.Process)
@@ -33,7 +33,7 @@ public class PhaseRepository: BaseRepository, IPhaseRepository
             .FirstOrDefaultAsync(p => p.Id == phaseId);
     }
 
-    public async Task<IEnumerable<Phase>> FinByProcessIdAsync(int processId)
+    public async Task<IEnumerable<RecruitmentPhase>> FinByProcessIdAsync(int processId)
     {
         return await Context.Phases
             .Where(p => p.ProcessId == processId)
@@ -41,13 +41,13 @@ public class PhaseRepository: BaseRepository, IPhaseRepository
             .ToListAsync();
     }
 
-    public void Update(Phase phase)
+    public void Update(RecruitmentPhase recruitmentPhase)
     {
-        Context.Phases.Update(phase);
+        Context.Phases.Update(recruitmentPhase);
     }
 
-    public void Remove(Phase phase)
+    public void Remove(RecruitmentPhase recruitmentPhase)
     {
-        Context.Phases.Remove(phase);
+        Context.Phases.Remove(recruitmentPhase);
     }
 }

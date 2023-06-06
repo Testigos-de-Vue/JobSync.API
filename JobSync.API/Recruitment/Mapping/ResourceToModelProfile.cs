@@ -10,7 +10,7 @@ public class ResourceToModelProfile: Profile
     {
         CreateMap<SaveJobAreaResource, JobArea>();
         CreateMap<SaveCandidateProfileResource, CandidateProfile>();
-        CreateMap<SavePhaseResource, Phase>();
+        CreateMap<SaveRecruitmentPhaseResource, RecruitmentPhase>();
         CreateMap<SaveProcessResource, Process>();
     }
 }

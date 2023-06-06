@@ -9,7 +9,7 @@ public class CandidateProfileResource
     public Boolean IsActive { get; set; }
     public DateTime PostulationDate { get; set; }
 
-    public PhaseResource Phase { get; set; }
+    public RecruitmentPhaseResource RecruitmentPhase { get; set; }
     public UserResource User { get; set; }
     public JobAreaResource JobArea { get; set; }
 }

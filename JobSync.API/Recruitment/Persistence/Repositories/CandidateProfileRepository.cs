@@ -17,7 +17,7 @@ public class CandidateProfileRepository: BaseRepository, ICandidateProfileReposi
         return await Context.CandidateProfiles
             .Include(c => c.JobArea)
             .Include(c=> c.User)
-            .Include(c=> c.Phase)
+            .Include(c=> c.RecruitmentPhase)
             .ToListAsync();
     }
 
@@ -31,7 +31,7 @@ public class CandidateProfileRepository: BaseRepository, ICandidateProfileReposi
         return await Context.CandidateProfiles
             .Include(c => c.JobArea)
             .Include(c => c.User)
-            .Include(c => c.Phase)
+            .Include(c => c.RecruitmentPhase)
             .FirstOrDefaultAsync(c => c.Id == candidateProfileId);
     }
 

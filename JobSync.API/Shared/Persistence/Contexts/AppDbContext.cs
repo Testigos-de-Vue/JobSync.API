@@ -12,7 +12,7 @@ public class AppDbContext : DbContext
   public DbSet<TaskItem> TaskItems {get; set;}
   public DbSet<JobArea> JobAreas { get; set; }
   public DbSet<CandidateProfile> CandidateProfiles { get; set; }
-  public DbSet<Phase> Phases { get; set; }
+  public DbSet<RecruitmentPhase> Phases { get; set; }
   public DbSet<Process> Processes { get; set; }
 
   public AppDbContext(DbContextOptions options) : base(options)
@@ -55,12 +55,12 @@ public class AppDbContext : DbContext
     builder.Entity<CandidateProfile>().Property(c => c.PostulationDate).IsRequired();
     
     // Phases Configuration
-    builder.Entity<Phase>().ToTable("Phases");
-    builder.Entity<Phase>().HasKey(p=>p.Id);
-    builder.Entity<Phase>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
-    builder.Entity<Phase>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
-    builder.Entity<Phase>().Property(p=>p.Description).IsRequired().HasMaxLength(256);
-    builder.Entity<Phase>().Property(p=>p.CreatedDate).IsRequired();
+    builder.Entity<RecruitmentPhase>().ToTable("Phases");
+    builder.Entity<RecruitmentPhase>().HasKey(p=>p.Id);
+    builder.Entity<RecruitmentPhase>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<RecruitmentPhase>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
+    builder.Entity<RecruitmentPhase>().Property(p=>p.Description).IsRequired().HasMaxLength(256);
+    builder.Entity<RecruitmentPhase>().Property(p=>p.CreatedDate).IsRequired();
     
     // Processes Configuration
     builder.Entity<Process>().ToTable("Processes");
@@ -81,9 +81,9 @@ public class AppDbContext : DbContext
       .HasOne(c => c.JobArea)
       .WithMany(c => c.Candidates)
       .HasForeignKey(c => c.JobAreaId);
-    builder.Entity<Phase>()
+    builder.Entity<RecruitmentPhase>()
       .HasMany(p => p.CandidateProfiles)
-      .WithOne(p => p.Phase)
+      .WithOne(p => p.RecruitmentPhase)
       .HasForeignKey(p => p.PhaseId);
     builder.Entity<Process>()
       .HasMany(p => p.Phases)

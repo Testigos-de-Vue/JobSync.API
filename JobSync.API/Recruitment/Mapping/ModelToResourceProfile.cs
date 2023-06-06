@@ -10,7 +10,7 @@ public class ModelToResourceProfile: Profile
     {
         CreateMap<JobArea, JobAreaResource>();
         CreateMap<CandidateProfile, CandidateProfileResource>();
-        CreateMap<Phase, PhaseResource>();
+        CreateMap<RecruitmentPhase, RecruitmentPhaseResource>();
         CreateMap<Process, ProcessResource>();
     }
 }

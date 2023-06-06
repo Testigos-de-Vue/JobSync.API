@@ -1,8 +1,8 @@
 ﻿namespace JobSync.API.Recruitment.Domain.Models;
 
-public class Phase
+public class RecruitmentPhase
 {
-    public Phase()
+    public RecruitmentPhase()
     {
         CandidateProfiles = new List<CandidateProfile>();
     }

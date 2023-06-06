@@ -1,6 +1,6 @@
 ﻿namespace JobSync.API.Recruitment.Resources;
 
-public class PhaseResource
+public class RecruitmentPhaseResource
 {
     public int Id { get; set; }
     public string Name { get; set; }
