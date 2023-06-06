@@ -6,7 +6,7 @@ namespace JobSync.API.Recruitment.Mapping;
 
 public class ModelToResourceProfile: Profile
 {
-    protected ModelToResourceProfile()
+    public ModelToResourceProfile()
     {
         CreateMap<JobArea, JobAreaResource>();
         CreateMap<CandidateProfile, CandidateProfileResource>();
