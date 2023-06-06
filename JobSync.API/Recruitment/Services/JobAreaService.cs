@@ -23,6 +23,11 @@ public class JobAreaService: IJobAreaService
 
     public async Task<JobAreaResponse> SaveAsync(JobArea jobArea)
     {
+        // Validate if job area name is repeated
+        var existingJobAreaName = _jobAreaRepository.FindByNameAsync(jobArea.Name);
+        if (existingJobAreaName != null)
+            return new JobAreaResponse($"Job Area name already exists.");
+        
         try
         {
             await _jobAreaRepository.AddAsync(jobArea);
@@ -38,10 +43,15 @@ public class JobAreaService: IJobAreaService
 
     public async Task<JobAreaResponse> UpdateAsync(int id, JobArea jobArea)
     {
+        // Validate if job area exists
         var existingJobArea = await _jobAreaRepository.FindByIdAsync(id);
-
         if (existingJobArea == null)
             return new JobAreaResponse($"Job Area nof found.");
+        
+        // Validate if job area name is repeated
+        var existingJobAreaName = _jobAreaRepository.FindByNameAsync(jobArea.Name);
+        if (existingJobAreaName != null)
+            return new JobAreaResponse($"Job Area name already exists.");
 
         try
         {

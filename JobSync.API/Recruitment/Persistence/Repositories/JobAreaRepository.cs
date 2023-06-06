@@ -27,6 +27,12 @@ public class JobAreaRepository: BaseRepository, IJobAreaRepository
         return await Context.JobAreas.FindAsync(id);
     }
 
+    public async Task<JobArea> FindByNameAsync(string name)
+    {
+        return await Context.JobAreas
+            .FirstOrDefaultAsync(j => j.Name == name);
+    }
+    
     public void Update(JobArea jobArea)
     {
         Context.JobAreas.Update(jobArea);
