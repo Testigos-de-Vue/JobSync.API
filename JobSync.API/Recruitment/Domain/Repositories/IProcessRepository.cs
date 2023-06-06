@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using JobSync.API.Recruitment.Domain.Models;
 
 namespace JobSync.API.Recruitment.Domain.Repositories;
 
