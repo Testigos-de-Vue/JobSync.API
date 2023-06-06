@@ -1,19 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices.JavaScript;
 
 namespace JobSync.API.Recruitment.Resources;
 
 public class SavePhaseResource
 {
     [Required]
-    [MaxLength(50)]
+    [MaxLength(32)]
     public string Name { get; set; }
     
-    [MaxLength(128)]
+    [MaxLength(256)]
     public string Description { get; set; }
     
     [Required]
-    public JSType.Date CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
     
     [Required]
     public int ProcessId { get; set; }

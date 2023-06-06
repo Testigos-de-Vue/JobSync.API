@@ -9,7 +9,7 @@ public class ResourceToModelProfile: Profile
     protected ResourceToModelProfile()
     {
         CreateMap<SaveJobAreaResource, JobArea>();
-        CreateMap<SaveCandidateResource, Candidate>();
+        CreateMap<SaveCandidateProfileResource, CandidateProfile>();
         CreateMap<SavePhaseResource, Phase>();
         CreateMap<SaveProcessResource, Process>();
     }
