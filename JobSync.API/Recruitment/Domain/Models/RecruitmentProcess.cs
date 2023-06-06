@@ -1,8 +1,8 @@
 ﻿namespace JobSync.API.Recruitment.Domain.Models;
 
-public class Process
+public class RecruitmentProcess
 {
-    public Process()
+    public RecruitmentProcess()
     {
         Phases = new List<RecruitmentPhase>();
     }

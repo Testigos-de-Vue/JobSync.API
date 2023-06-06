@@ -11,6 +11,6 @@ public class ResourceToModelProfile: Profile
         CreateMap<SaveJobAreaResource, JobArea>();
         CreateMap<SaveCandidateProfileResource, CandidateProfile>();
         CreateMap<SaveRecruitmentPhaseResource, RecruitmentPhase>();
-        CreateMap<SaveProcessResource, Process>();
+        CreateMap<SaveRecruitmentProcessResource, RecruitmentProcess>();
     }
 }

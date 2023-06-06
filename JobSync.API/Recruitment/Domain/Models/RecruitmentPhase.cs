@@ -13,7 +13,7 @@ public class RecruitmentPhase
     public DateTime CreatedDate { get; set; }
     
     public int ProcessId { get; set; }
-    public Process Process { get; set; }
+    public RecruitmentProcess RecruitmentProcess { get; set; }
     
     public List<CandidateProfile> CandidateProfiles { get; set; }
 }

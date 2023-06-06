@@ -13,7 +13,7 @@ public class AppDbContext : DbContext
   public DbSet<JobArea> JobAreas { get; set; }
   public DbSet<CandidateProfile> CandidateProfiles { get; set; }
   public DbSet<RecruitmentPhase> Phases { get; set; }
-  public DbSet<Process> Processes { get; set; }
+  public DbSet<RecruitmentProcess> Processes { get; set; }
 
   public AppDbContext(DbContextOptions options) : base(options)
   {
@@ -55,7 +55,7 @@ public class AppDbContext : DbContext
     builder.Entity<CandidateProfile>().Property(c => c.PostulationDate).IsRequired();
     
     // Phases Configuration
-    builder.Entity<RecruitmentPhase>().ToTable("Phases");
+    builder.Entity<RecruitmentPhase>().ToTable("RecruitmentPhases");
     builder.Entity<RecruitmentPhase>().HasKey(p=>p.Id);
     builder.Entity<RecruitmentPhase>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<RecruitmentPhase>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
@@ -63,14 +63,14 @@ public class AppDbContext : DbContext
     builder.Entity<RecruitmentPhase>().Property(p=>p.CreatedDate).IsRequired();
     
     // Processes Configuration
-    builder.Entity<Process>().ToTable("Processes");
-    builder.Entity<Process>().HasKey(p=>p.Id);
-    builder.Entity<Process>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
-    builder.Entity<Process>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
-    builder.Entity<Process>().Property(p=>p.Description).IsRequired().HasMaxLength(256);
-    builder.Entity<Process>().Property(p=>p.StartingDate).IsRequired();
-    builder.Entity<Process>().Property(p=>p.EndingDate).IsRequired();
-    builder.Entity<Process>().Property(p=>p.Status).IsRequired();
+    builder.Entity<RecruitmentProcess>().ToTable("RecruitmentProcesses");
+    builder.Entity<RecruitmentProcess>().HasKey(p=>p.Id);
+    builder.Entity<RecruitmentProcess>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<RecruitmentProcess>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
+    builder.Entity<RecruitmentProcess>().Property(p=>p.Description).IsRequired().HasMaxLength(256);
+    builder.Entity<RecruitmentProcess>().Property(p=>p.StartingDate).IsRequired();
+    builder.Entity<RecruitmentProcess>().Property(p=>p.EndingDate).IsRequired();
+    builder.Entity<RecruitmentProcess>().Property(p=>p.Status).IsRequired();
     
     // Relationships
     builder.Entity<User>()
@@ -85,9 +85,9 @@ public class AppDbContext : DbContext
       .HasMany(p => p.CandidateProfiles)
       .WithOne(p => p.RecruitmentPhase)
       .HasForeignKey(p => p.PhaseId);
-    builder.Entity<Process>()
+    builder.Entity<RecruitmentProcess>()
       .HasMany(p => p.Phases)
-      .WithOne(p => p.Process)
+      .WithOne(p => p.RecruitmentProcess)
       .HasForeignKey(p => p.ProcessId);
 
     // Apply Snake Case Naming Convention

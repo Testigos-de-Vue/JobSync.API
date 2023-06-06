@@ -15,7 +15,7 @@ public class RecruitmentPhaseRepository: BaseRepository, IRecruitmentPhaseReposi
     public async Task<IEnumerable<RecruitmentPhase>> ListAsync()
     {
         return await Context.Phases
-            .Include(p => p.Process)
+            .Include(p => p.RecruitmentProcess)
             .Include(p => p.CandidateProfiles)
             .ToListAsync();
     }
@@ -28,7 +28,7 @@ public class RecruitmentPhaseRepository: BaseRepository, IRecruitmentPhaseReposi
     public async Task<RecruitmentPhase> FindByIdAsync(int phaseId)
     {
         return await Context.Phases
-            .Include(p => p.Process)
+            .Include(p => p.RecruitmentProcess)
             .Include(p => p.CandidateProfiles)
             .FirstOrDefaultAsync(p => p.Id == phaseId);
     }
@@ -37,7 +37,7 @@ public class RecruitmentPhaseRepository: BaseRepository, IRecruitmentPhaseReposi
     {
         return await Context.Phases
             .Where(p => p.ProcessId == processId)
-            .Include(p => p.Process)
+            .Include(p => p.RecruitmentProcess)
             .ToListAsync();
     }
 

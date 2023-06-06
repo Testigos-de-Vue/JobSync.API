@@ -7,5 +7,5 @@ public class RecruitmentPhaseResource
     public string Description { get; set; }
     public DateTime CreatedDate { get; set; }
     
-    public ProcessResource Process { get; set; }
+    public RecruitmentProcessResource RecruitmentProcess { get; set; }
 }

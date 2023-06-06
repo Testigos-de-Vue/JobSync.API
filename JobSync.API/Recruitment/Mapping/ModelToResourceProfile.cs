@@ -11,6 +11,6 @@ public class ModelToResourceProfile: Profile
         CreateMap<JobArea, JobAreaResource>();
         CreateMap<CandidateProfile, CandidateProfileResource>();
         CreateMap<RecruitmentPhase, RecruitmentPhaseResource>();
-        CreateMap<Process, ProcessResource>();
+        CreateMap<RecruitmentProcess, RecruitmentProcessResource>();
     }
 }
