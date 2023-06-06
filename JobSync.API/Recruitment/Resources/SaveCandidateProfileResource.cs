@@ -1,16 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices.JavaScript;
 
 namespace JobSync.API.Recruitment.Resources;
 
-public class SaveCandidateResource
+public class SaveCandidateProfileResource
 {
+    [MaxLength(256)]
     public string CvUrl { get; set; }
+    
     public Boolean IsActive { get; set; }
     
     [Required]
-    public JSType.Date PostulationDate { get; set; }
+    public DateTime PostulationDate { get; set; }
 
+    [Required]
+    public int PhaseId { get; set; }
+    
     [Required]
     public int UserId { get; set; }
     
