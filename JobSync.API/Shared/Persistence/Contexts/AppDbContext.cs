@@ -10,6 +10,10 @@ public class AppDbContext : DbContext
 {
   public DbSet<User> Users { get; set; }
   public DbSet<TaskItem> TaskItems {get; set;}
+  public DbSet<JobArea> JobAreas { get; set; }
+  public DbSet<CandidateProfile> CandidateProfiles { get; set; }
+  public DbSet<Phase> Phases { get; set; }
+  public DbSet<Process> Processes { get; set; }
 
   public AppDbContext(DbContextOptions options) : base(options)
   {
