@@ -7,7 +7,7 @@ public interface IRecruitmentPhaseRepository
     Task<IEnumerable<RecruitmentPhase>>ListAsync();
     Task AddAsync(RecruitmentPhase recruitmentPhase);
     Task<RecruitmentPhase> FindByIdAsync(int phaseId);
-    Task<IEnumerable<RecruitmentPhase>> FinByProcessIdAsync(int processId);
+    Task<IEnumerable<RecruitmentPhase>> FinByRecruitmentProcessIdAsync(int processId);
     void Update(RecruitmentPhase recruitmentPhase);
     void Remove(RecruitmentPhase recruitmentPhase);
 }

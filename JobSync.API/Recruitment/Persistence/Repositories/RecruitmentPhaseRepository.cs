@@ -33,10 +33,10 @@ public class RecruitmentPhaseRepository: BaseRepository, IRecruitmentPhaseReposi
             .FirstOrDefaultAsync(p => p.Id == phaseId);
     }
 
-    public async Task<IEnumerable<RecruitmentPhase>> FinByProcessIdAsync(int processId)
+    public async Task<IEnumerable<RecruitmentPhase>> FinByRecruitmentProcessIdAsync(int processId)
     {
         return await Context.Phases
-            .Where(p => p.ProcessId == processId)
+            .Where(p => p.RecruitmentProcessId == processId)
             .Include(p => p.RecruitmentProcess)
             .ToListAsync();
     }

@@ -84,11 +84,11 @@ public class AppDbContext : DbContext
     builder.Entity<RecruitmentPhase>()
       .HasMany(p => p.CandidateProfiles)
       .WithOne(p => p.RecruitmentPhase)
-      .HasForeignKey(p => p.PhaseId);
+      .HasForeignKey(p => p.RecruitmentPhaseId);
     builder.Entity<RecruitmentProcess>()
       .HasMany(p => p.Phases)
       .WithOne(p => p.RecruitmentProcess)
-      .HasForeignKey(p => p.ProcessId);
+      .HasForeignKey(p => p.RecruitmentProcessId);
 
     // Apply Snake Case Naming Convention
     builder.UseSnakeCaseNamingConvention();
