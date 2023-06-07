@@ -54,7 +54,7 @@ public class AppDbContext : DbContext
     builder.Entity<CandidateProfile>().Property(c => c.IsActive).IsRequired();
     builder.Entity<CandidateProfile>().Property(c => c.PostulationDate).IsRequired();
     
-    // Phases Configuration
+    // RecruitmentPhases Configuration
     builder.Entity<RecruitmentPhase>().ToTable("RecruitmentPhases");
     builder.Entity<RecruitmentPhase>().HasKey(p=>p.Id);
     builder.Entity<RecruitmentPhase>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -62,7 +62,7 @@ public class AppDbContext : DbContext
     builder.Entity<RecruitmentPhase>().Property(p=>p.Description).IsRequired().HasMaxLength(256);
     builder.Entity<RecruitmentPhase>().Property(p=>p.CreatedDate).IsRequired();
     
-    // Processes Configuration
+    // RecruitmentProcesses Configuration
     builder.Entity<RecruitmentProcess>().ToTable("RecruitmentProcesses");
     builder.Entity<RecruitmentProcess>().HasKey(p=>p.Id);
     builder.Entity<RecruitmentProcess>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -73,22 +73,22 @@ public class AppDbContext : DbContext
     builder.Entity<RecruitmentProcess>().Property(p=>p.Status).IsRequired();
     
     // Relationships
-    builder.Entity<User>()
-      .HasMany(u => u.CandidateProfiles)
-      .WithOne(u => u.User)
-      .HasForeignKey(u => u.UserId);
-    builder.Entity<CandidateProfile>()
-      .HasOne(c => c.JobArea)
-      .WithMany(c => c.Candidates)
-      .HasForeignKey(c => c.JobAreaId);
-    builder.Entity<RecruitmentPhase>()
-      .HasMany(p => p.CandidateProfiles)
-      .WithOne(p => p.RecruitmentPhase)
-      .HasForeignKey(p => p.RecruitmentPhaseId);
     builder.Entity<RecruitmentProcess>()
       .HasMany(p => p.Phases)
       .WithOne(p => p.RecruitmentProcess)
       .HasForeignKey(p => p.RecruitmentProcessId);
+    builder.Entity<RecruitmentPhase>()
+      .HasMany(p => p.CandidateProfiles)
+      .WithOne(p => p.RecruitmentPhase)
+      .HasForeignKey(p => p.RecruitmentPhaseId);
+    builder.Entity<CandidateProfile>()
+      .HasOne(c => c.JobArea)
+      .WithMany(c => c.CandidateProfiles)
+      .HasForeignKey(c => c.JobAreaId);
+    builder.Entity<User>()
+      .HasMany(u => u.CandidateProfiles)
+      .WithOne(u => u.User)
+      .HasForeignKey(u => u.UserId);
 
     // Apply Snake Case Naming Convention
     builder.UseSnakeCaseNamingConvention();
