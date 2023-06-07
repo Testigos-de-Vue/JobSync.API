@@ -6,7 +6,7 @@ public class Profile
   public string CvUrl { get; set; }
   
   // Relationships
-  public Role role { get; set; }
+  public Role Role { get; set; }
   public int OrganizationId { get; set; }
   public int UserId { get; set; }
 }

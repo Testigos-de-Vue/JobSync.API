@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
 {
   public DbSet<User> Users { get; set; }
   public DbSet<Role> Roles { get; set; }
+  public DbSet<JobSync.API.Profile.Domain.Models.Profile> Profiles { get; set; }
   public DbSet<TaskItem> TaskItems {get; set;}
   public DbSet<JobArea> JobAreas { get; set; }
   public DbSet<CandidateProfile> CandidateProfiles { get; set; }
@@ -42,6 +43,14 @@ public class AppDbContext : DbContext
     builder.Entity<Role>().HasKey(r => r.Id);
     builder.Entity<Role>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(24);
+    
+    // Profiles Configuration
+    builder.Entity<JobSync.API.Profile.Domain.Models.Profile>().ToTable("Profiles");
+    builder.Entity<JobSync.API.Profile.Domain.Models.Profile>().HasKey(p => p.Id);
+    builder.Entity<JobSync.API.Profile.Domain.Models.Profile>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<JobSync.API.Profile.Domain.Models.Profile>().Property(p => p.UserId).IsRequired();
+    builder.Entity<JobSync.API.Profile.Domain.Models.Profile>().Property(p => p.CvUrl).HasMaxLength(255);
+    builder.Entity<JobSync.API.Profile.Domain.Models.Profile>().Property(p => p.OrganizationId);
     
     // TaskItems Configuration
     builder.Entity<TaskItem>().Property(t=>t.Id).IsRequired().ValueGeneratedOnAdd();
@@ -81,22 +90,35 @@ public class AppDbContext : DbContext
     builder.Entity<RecruitmentProcess>().Property(p=>p.Status).IsRequired();
     
     // Relationships
-    builder.Entity<RecruitmentProcess>()
-      .HasMany(p => p.Phases)
-      .WithOne(p => p.RecruitmentProcess)
-      .HasForeignKey(p => p.RecruitmentProcessId);
-    builder.Entity<RecruitmentPhase>()
-      .HasMany(p => p.CandidateProfiles)
-      .WithOne(p => p.RecruitmentPhase)
-      .HasForeignKey(p => p.RecruitmentPhaseId);
-    builder.Entity<CandidateProfile>()
-      .HasOne(c => c.JobArea)
-      .WithMany(c => c.CandidateProfiles)
-      .HasForeignKey(c => c.JobAreaId);
     builder.Entity<User>()
       .HasMany(u => u.CandidateProfiles)
       .WithOne(u => u.User)
       .HasForeignKey(u => u.UserId);
+
+    builder.Entity<JobSync.API.Profile.Domain.Models.Profile>()
+      .HasOne(p => p.Role)
+      .WithMany(r => r.Profiles)
+      .HasForeignKey(p => p.Id);
+
+    builder.Entity<Role>()
+      .HasMany(r => r.Profiles)
+      .WithOne(p => p.Role)
+      .HasForeignKey(p => p.Id);
+
+    builder.Entity<RecruitmentProcess>()
+      .HasMany(p => p.Phases)
+      .WithOne(p => p.RecruitmentProcess)
+      .HasForeignKey(p => p.RecruitmentProcessId);
+    
+    builder.Entity<RecruitmentPhase>()
+      .HasMany(p => p.CandidateProfiles)
+      .WithOne(p => p.RecruitmentPhase)
+      .HasForeignKey(p => p.RecruitmentPhaseId);
+    
+    builder.Entity<CandidateProfile>()
+      .HasOne(c => c.JobArea)
+      .WithMany(c => c.CandidateProfiles)
+      .HasForeignKey(c => c.JobAreaId);
 
     // Apply Snake Case Naming Convention
     builder.UseSnakeCaseNamingConvention();
