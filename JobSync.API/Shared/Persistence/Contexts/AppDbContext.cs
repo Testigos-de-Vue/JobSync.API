@@ -1,5 +1,6 @@
 ﻿using JobSync.API.Activity.Domain.Models;
 using JobSync.API.Authentication.Domain.Models;
+using JobSync.API.Profile.Domain.Models;
 using JobSync.API.Recruitment.Domain.Models;
 using JobSync.API.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace JobSync.API.Shared.Persistence.Contexts;
 public class AppDbContext : DbContext
 {
   public DbSet<User> Users { get; set; }
+  public DbSet<Role> Roles { get; set; }
   public DbSet<TaskItem> TaskItems {get; set;}
   public DbSet<JobArea> JobAreas { get; set; }
   public DbSet<CandidateProfile> CandidateProfiles { get; set; }
@@ -34,6 +36,12 @@ public class AppDbContext : DbContext
     builder.Entity<User>().Property(u => u.Password).IsRequired();
     builder.Entity<User>().Property(u => u.IsSubscribedToNewsletter).IsRequired();
     builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
+    
+    // Roles Configuration
+    builder.Entity<Role>().ToTable("Roles");
+    builder.Entity<Role>().HasKey(r => r.Id);
+    builder.Entity<Role>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(24);
     
     // TaskItems Configuration
     builder.Entity<TaskItem>().Property(t=>t.Id).IsRequired().ValueGeneratedOnAdd();
