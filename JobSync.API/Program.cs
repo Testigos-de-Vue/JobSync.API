@@ -43,6 +43,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Profile Bounded Context Injection Configuration
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
 // Authentication Bounded Context Injection Configuration
 builder.Services.AddScoped<IUserService, UserService>();
