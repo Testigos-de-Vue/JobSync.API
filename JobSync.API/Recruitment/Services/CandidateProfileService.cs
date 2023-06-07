@@ -48,16 +48,10 @@ public class CandidateProfileService: ICandidateProfileService
         var existingJobArea = await _candidateProfileRepository.FindByJobAreaIdAsync(candidateProfile.JobAreaId);
         if (existingJobArea == null)
             return new CandidateProfileReponse($"Invalid Job Area.");
-        
-        // Validate if user exists
-        var existingUser = await _candidateProfileRepository.FindByUserIdAsync(candidateProfile.UserId);
-        if (existingUser == null)
-            return new CandidateProfileReponse($"Invalid User.");
-        
+
         // Update fields
         existingCandidateProfile.JobArea = candidateProfile.JobArea;
-        existingCandidateProfile.User = candidateProfile.User;
-        
+
         try
         {
             _candidateProfileRepository.Update(existingCandidateProfile);

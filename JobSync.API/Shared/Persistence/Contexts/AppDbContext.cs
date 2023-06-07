@@ -90,11 +90,6 @@ public class AppDbContext : DbContext
     builder.Entity<RecruitmentProcess>().Property(p=>p.Status).IsRequired();
     
     // Relationships
-    builder.Entity<User>()
-      .HasMany(u => u.CandidateProfiles)
-      .WithOne(u => u.User)
-      .HasForeignKey(u => u.UserId);
-
     builder.Entity<JobSync.API.Profile.Domain.Models.Profile>()
       .HasOne(p => p.Role)
       .WithMany(r => r.Profiles)

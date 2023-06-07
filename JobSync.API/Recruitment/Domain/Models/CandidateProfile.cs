@@ -14,7 +14,6 @@ public class CandidateProfile
     public JobArea JobArea { get; set; }
     
     public int UserId { get; set; }
-    public User User { get; set; }
 
     public int RecruitmentPhaseId { get; set; }
     public RecruitmentPhase RecruitmentPhase { get; set; }

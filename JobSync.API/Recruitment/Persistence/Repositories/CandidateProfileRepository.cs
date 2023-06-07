@@ -16,7 +16,6 @@ public class CandidateProfileRepository: BaseRepository, ICandidateProfileReposi
     {
         return await Context.CandidateProfiles
             .Include(c => c.JobArea)
-            .Include(c=> c.User)
             .Include(c=> c.RecruitmentPhase)
             .ToListAsync();
     }
@@ -30,7 +29,6 @@ public class CandidateProfileRepository: BaseRepository, ICandidateProfileReposi
     {
         return await Context.CandidateProfiles
             .Include(c => c.JobArea)
-            .Include(c => c.User)
             .Include(c => c.RecruitmentPhase)
             .FirstOrDefaultAsync(c => c.Id == candidateProfileId);
     }
@@ -40,14 +38,6 @@ public class CandidateProfileRepository: BaseRepository, ICandidateProfileReposi
         return await Context.CandidateProfiles
             .Where(c => c.JobAreaId == jobAreaId)
             .Include(c => c.JobArea)
-            .ToListAsync();
-    }
-
-    public async Task<IEnumerable<CandidateProfile>> FindByUserIdAsync(int userId)
-    {
-        return await Context.CandidateProfiles
-            .Where(c => c.UserId == userId)
-            .Include(c => c.User)
             .ToListAsync();
     }
 
