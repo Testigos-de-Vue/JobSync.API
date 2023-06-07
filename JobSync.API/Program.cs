@@ -10,6 +10,7 @@ using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+  options.SwaggerDoc("v1", new OpenApiInfo
+  {
+    Version = "v1",
+    Title = "JobSync API",
+    Description = "JobSync Restful API",
+    TermsOfService = new Uri("https://jobsync.netlify.app/terms-of-service/"),
+    Contact = new OpenApiContact
+    {
+      Name = "Testigos de Vue",
+      Url = new Uri("https://jobsync.netlify.app/"),
+    },
+    License = new OpenApiLicense
+    {
+      Name = "Testigos de Vue Resources License",
+      Url = new Uri("https://jobsync.netlify.app/")
+    }
+  });
+  options.EnableAnnotations();
+});
 
 // Add Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -71,7 +92,11 @@ using (var context = scope.ServiceProvider.GetService<AppDbContext>())
 if (app.Environment.IsDevelopment())
 {
   app.UseSwagger();
-  app.UseSwaggerUI();
+  app.UseSwaggerUI(options =>
+  {
+    options.SwaggerEndpoint("v1/swagger.json", "v1");
+    options.RoutePrefix = "swagger";
+  });
 }
 
 app.UseHttpsRedirection();
