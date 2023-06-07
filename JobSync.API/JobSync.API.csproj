@@ -21,7 +21,6 @@
     <ItemGroup>
       <Folder Include="Authentication\Interfaces\Internal\" />
       <Folder Include="Profile\Interfaces\Internal\" />
-      <Folder Include="Profile\Interfaces\Rest\Controllers\" />
     </ItemGroup>
 
 </Project>
