@@ -11,5 +11,4 @@ public class TaskItem
    
     //Relationships
     public int UserId { get; set; }
-    public User User { get; set; }
 }
