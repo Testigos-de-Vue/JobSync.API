@@ -20,9 +20,6 @@
 
     <ItemGroup>
       <Folder Include="Authentication\Interfaces\Internal\" />
-      <Folder Include="Profile\Domain\Models\" />
-      <Folder Include="Profile\Domain\Repositories\" />
-      <Folder Include="Profile\Domain\Services\" />
       <Folder Include="Profile\Interfaces\Internal\" />
       <Folder Include="Profile\Interfaces\Rest\Controllers\" />
       <Folder Include="Profile\Mapping\" />
