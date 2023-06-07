@@ -8,5 +8,6 @@ public class ResourceToModelProfile : AutoMapper.Profile
   public ResourceToModelProfile()
   {
     CreateMap<SaveRoleResource, Role>();
+    CreateMap<ProfileResource, Domain.Models.Profile>();
   }
 }
