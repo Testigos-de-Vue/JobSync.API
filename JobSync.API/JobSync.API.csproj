@@ -24,7 +24,6 @@
       <Folder Include="Profile\Interfaces\Rest\Controllers\" />
       <Folder Include="Profile\Mapping\" />
       <Folder Include="Profile\Persistence\Repositories\" />
-      <Folder Include="Profile\Resources\" />
       <Folder Include="Profile\Services\" />
     </ItemGroup>
 
