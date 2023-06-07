@@ -6,6 +6,10 @@ using JobSync.API.Authentication.Domain.Repositories;
 using JobSync.API.Authentication.Domain.Services;
 using JobSync.API.Authentication.Persistence.Repositories;
 using JobSync.API.Authentication.Services;
+using JobSync.API.Profile.Domain.Repositories;
+using JobSync.API.Profile.Domain.Services;
+using JobSync.API.Profile.Persistence.Repositories;
+using JobSync.API.Profile.Services;
 using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
@@ -57,6 +61,12 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// Profile Bounded Context Injection Configuration
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+
 // Authentication Bounded Context Injection Configuration
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -71,6 +81,11 @@ builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Authentication.Mapping.ModelToResourceProfile),
   typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
+);
+
+builder.Services.AddAutoMapper(
+  typeof(JobSync.API.Profile.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Profile.Mapping.ResourceToModelProfile)
 );
 
 builder.Services.AddAutoMapper(

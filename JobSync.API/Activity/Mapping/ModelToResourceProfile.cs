@@ -1,10 +1,9 @@
-using AutoMapper;
 using JobSync.API.Activity.Resources;
 using JobSync.API.Activity.Domain.Models;
 
 namespace JobSync.API.Activity.Mapping;
 
-public class ModelToResourceProfile : Profile
+public class ModelToResourceProfile : AutoMapper.Profile
 {
     public ModelToResourceProfile()
     {
