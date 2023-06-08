@@ -7,7 +7,7 @@ public interface IPhaseRepository
     Task<IEnumerable<Phase>>ListAsync();
     Task AddAsync(Phase phase);
     Task<Phase> FindByIdAsync(int phaseId);
-    Task<IEnumerable<Phase>> FinByRecruitmentProcessIdAsync(int processId);
+    Task<IEnumerable<Phase>> FinByProcessIdAsync(int processId);
     void Update(Phase phase);
     void Remove(Phase phase);
 }

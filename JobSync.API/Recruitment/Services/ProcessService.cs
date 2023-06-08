@@ -33,7 +33,7 @@ public class ProcessService: IProcessService
         }
         catch (Exception e)
         {
-            return new ProcessResponse($"An error occurred while saving recruitment process : {e.Message}");
+            return new ProcessResponse($"An error occurred while saving recruitment process : {e.Message}.");
         }
     }
 
@@ -42,7 +42,7 @@ public class ProcessService: IProcessService
         var existingRecruitmentProcess = await _processRepository.FindByIdAsync(id);
 
         if (existingRecruitmentProcess == null)
-            return new ProcessResponse("Recruitment process not found,");
+            return new ProcessResponse("Recruitment process not found.");
 
         try
         {
@@ -62,7 +62,7 @@ public class ProcessService: IProcessService
         var existingRecruitmentProcess = await _processRepository.FindByIdAsync(id);
 
         if (existingRecruitmentProcess == null)
-            return new ProcessResponse("Recruitment process not found,");
+            return new ProcessResponse("Recruitment process not found.");
 
         try
         {

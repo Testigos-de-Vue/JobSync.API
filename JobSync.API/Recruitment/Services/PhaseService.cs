@@ -10,11 +10,13 @@ public class PhaseService: IPhaseService
 {
     private readonly IPhaseRepository _phaseRepository;
     private readonly UnitOfWork _unitOfWork;
+    private readonly IProcessRepository _processRepository;
 
-    public PhaseService(IPhaseRepository phaseRepository, UnitOfWork unitOfWork)
+    public PhaseService(IPhaseRepository phaseRepository, UnitOfWork unitOfWork, IProcessRepository processRepository)
     {
         _phaseRepository = phaseRepository;
         _unitOfWork = unitOfWork;
+        _processRepository = processRepository;
     }
 
     public async Task<IEnumerable<Phase>> ListAsync()
@@ -22,66 +24,66 @@ public class PhaseService: IPhaseService
         return await _phaseRepository.ListAsync();
     }
 
-    public async Task<PhaseReponse> SaveAsync(Phase phase)
+    public async Task<PhaseResponse> SaveAsync(Phase phase)
     {
         try
         {
             await _phaseRepository.AddAsync(phase);
             await _unitOfWork.CompleteAsync();
 
-            return new PhaseReponse(phase);
+            return new PhaseResponse(phase);
         }
         catch (Exception e)
         {
-            return new PhaseReponse($"An error occurred while saving recruitment phase : {e.Message}");
+            return new PhaseResponse($"An error occurred while saving recruitment phase : {e.Message}");
         }
     }
 
-    public async Task<PhaseReponse> UpdateAsync(int id, Phase phase)
+    public async Task<PhaseResponse> UpdateAsync(int id, Phase phase)
     {
         // Validate if recruitment phase exists
-        var existingRecruitmentPhase = await _phaseRepository.FindByIdAsync(id);
-        if (existingRecruitmentPhase == null)
-            return new PhaseReponse("Recruitment phase not found.");
+        var existingPhase = await _phaseRepository.FindByIdAsync(id);
+        if (existingPhase == null)
+            return new PhaseResponse("Recruitment phase not found.");
         
         // Validate if recruitment process exists
-        var existingRecruitmentProcess = await _phaseRepository.FinByRecruitmentProcessIdAsync(phase.RecruitmentProcessId);
-        if (existingRecruitmentProcess == null)
-            return new PhaseReponse("Invalid recruitment process.");
+        var existingProcess = await _processRepository.FindByIdAsync(phase.RecruitmentProcessId);
+        if (existingProcess == null)
+            return new PhaseResponse("Invalid recruitment process.");
         
         // Perform updates
-        existingRecruitmentPhase.Process = phase.Process;
+        existingPhase.Process = phase.Process;
         
         try
         {
-            _phaseRepository.Update(existingRecruitmentPhase);
+            _phaseRepository.Update(existingPhase);
             await _unitOfWork.CompleteAsync();
 
-            return new PhaseReponse(existingRecruitmentPhase);
+            return new PhaseResponse(existingPhase);
         }
         catch (Exception e)
         {
-            return new PhaseReponse($"An error occurred while updating recruitment phase: {e.Message}");
+            return new PhaseResponse($"An error occurred while updating recruitment phase: {e.Message}.");
         }
     }
 
-    public async Task<PhaseReponse> DeleteAsync(int id)
+    public async Task<PhaseResponse> DeleteAsync(int id)
     {
-        var existingRecruitmentPhase = await _phaseRepository.FindByIdAsync(id);
+        var existingPhase = await _phaseRepository.FindByIdAsync(id);
 
-        if (existingRecruitmentPhase == null)
-            return new PhaseReponse("Recruitment phase not found.");
+        if (existingPhase == null)
+            return new PhaseResponse("Recruitment phase not found.");
 
         try
         {
-            _phaseRepository.Remove(existingRecruitmentPhase);
+            _phaseRepository.Remove(existingPhase);
             await _unitOfWork.CompleteAsync();
 
-            return new PhaseReponse(existingRecruitmentPhase);
+            return new PhaseResponse(existingPhase);
         }
         catch (Exception e)
         {
-            return new PhaseReponse($"An error occurred while deleting recruitment phase: {e.Message}");
+            return new PhaseResponse($"An error occurred while deleting recruitment phase: {e.Message}.");
         }
     }
 }

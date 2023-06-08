@@ -14,10 +14,10 @@ public class Phase
     public string Description { get; set; }
     public DateTime CreatedDate { get; set; }
     
-    public int RecruitmentProcessId { get; set; }
-    public Process Process { get; set; }
-    
     // Candidate profiles
     [NotMapped]
     public List<int> ProfileIds { get; set; }
+    
+    public int RecruitmentProcessId { get; set; }
+    public Process Process { get; set; }
 }
