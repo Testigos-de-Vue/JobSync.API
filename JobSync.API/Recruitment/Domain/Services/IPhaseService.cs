@@ -10,4 +10,5 @@ public interface IPhaseService
     Task<PhaseResponse> SaveAsync(Phase phase);
     Task<PhaseResponse> UpdateAsync(int id, Phase phase);
     Task<PhaseResponse> DeleteAsync(int id);
+    Task<PhaseResponse> PhaseCountByProcessIdAsync(int processId);
 }

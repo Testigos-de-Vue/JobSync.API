@@ -1,19 +1,18 @@
-﻿using JobSync.API.Recruitment.Domain.Repositories;
+﻿using JobSync.API.Recruitment.Domain.Services;
 using JobSync.API.Recruitment.Interfaces.Internal;
-using JobSync.API.Recruitment.Persistence.Repositories;
 
 namespace JobSync.API.Recruitment.Services;
 
 public class RecruitmentContextFacade: IRecruitmentContextFacade
 {
-    private readonly IPhaseRepository _phaseRepository;
+    private readonly IPhaseService _phaseService;
 
-    public int TotalPhasesPerProcessId(int processId)
+    public int PhasesByProcessId(int processId)
     {
-        return _phaseRepository.FinByProcessIdAsync(processId).Result.Count();
+        throw new NotImplementedException();
     }
 
-    public int TotalCandidatesPerProcessId(int processId)
+    public int CandidatesByProcessId(int processId)
     {
         throw new NotImplementedException();
     }

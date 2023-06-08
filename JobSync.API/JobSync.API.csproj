@@ -19,9 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Analytics\Domain\Services\" />
-      <Folder Include="Analytics\Interfaces\Rest\" />
-      <Folder Include="Analytics\Services\" />
       <Folder Include="Authentication\Interfaces\Internal\" />
       <Folder Include="Profile\Interfaces\Internal\" />
     </ItemGroup>
