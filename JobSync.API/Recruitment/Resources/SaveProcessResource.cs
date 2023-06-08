@@ -2,7 +2,7 @@
 
 namespace JobSync.API.Recruitment.Resources;
 
-public class SaveRecruitmentPhaseResource
+public class SaveProcessResource
 {
     [Required]
     [MaxLength(32)]
@@ -12,8 +12,10 @@ public class SaveRecruitmentPhaseResource
     public string Description { get; set; }
     
     [Required]
-    public DateTime CreatedDate { get; set; }
+    public DateTime StartingDate { get; set; }
     
     [Required]
-    public int ProcessId { get; set; }
+    public DateTime EndingDate { get; set; }
+    
+    public Boolean Status { get; set; }
 }

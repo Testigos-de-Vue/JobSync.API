@@ -7,9 +7,7 @@ public class ResourceToModelProfile: AutoMapper.Profile
 {
     public ResourceToModelProfile()
     {
-        CreateMap<SaveJobAreaResource, JobArea>();
-        CreateMap<SaveCandidateProfileResource, CandidateProfile>();
-        CreateMap<SaveRecruitmentPhaseResource, RecruitmentPhase>();
-        CreateMap<SaveRecruitmentProcessResource, RecruitmentProcess>();
+        CreateMap<SavePhaseResource, Phase>();
+        CreateMap<SaveProcessResource, Process>();
     }
 }
