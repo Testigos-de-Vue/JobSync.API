@@ -3,13 +3,13 @@ using JobSync.API.Shared.Domain.Services.Communication;
 
 namespace JobSync.API.Recruitment.Domain.Services.Communication;
 
-public class JobAreaResponse: BaseResponse<JobArea>
+public class PhaseReponse: BaseResponse<Phase>
 {
-    public JobAreaResponse(string message) : base(message)
+    public PhaseReponse(string message) : base(message)
     {
     }
 
-    public JobAreaResponse(JobArea resource) : base(resource)
+    public PhaseReponse(Phase resource) : base(resource)
     {
     }
 }
