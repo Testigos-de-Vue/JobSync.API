@@ -9,12 +9,11 @@ namespace JobSync.API.Organization.Interfaces.Rest.Controllers;
 
 
 [ApiController]
-[Route("api/v1/plans")]
+[Route("api/v1/enterprise/plans")]
 [Produces(MediaTypeNames.Application.Json)]
 
 public class PlanController : ControllerBase
 {
-    
     private readonly IPlanService _planService;
     private readonly IMapper _mapper;
     

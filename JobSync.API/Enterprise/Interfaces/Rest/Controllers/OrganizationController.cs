@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobSync.API.Organization.Interfaces.Rest.Controllers;
 
 [ApiController]
-[Route("api/v1/organizations")]
+[Route("api/v1/enterprise/organizations")]
 [Produces(MediaTypeNames.Application.Json)]
 
 public class OrganizationController : ControllerBase
