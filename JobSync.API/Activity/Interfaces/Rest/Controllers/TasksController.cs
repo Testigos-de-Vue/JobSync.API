@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobSync.API.Activity.Interfaces.Rest.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/activity/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 public class TasksController : ControllerBase
 {
