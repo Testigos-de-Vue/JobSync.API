@@ -54,7 +54,7 @@ public class AppDbContext : DbContext
     builder.Entity<TaskItem>().ToTable("TaskItems");
     builder.Entity<TaskItem>().Property(t=>t.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<TaskItem>().Property(t=>t.Title).IsRequired().HasMaxLength(64);
-    builder.Entity<TaskItem>().Property(t=>t.Description).IsRequired().HasMaxLength(64);
+    builder.Entity<TaskItem>().Property(t=>t.Description).IsRequired().HasMaxLength(256);
     builder.Entity<TaskItem>().Property(t=>t.Date).IsRequired();
 
     // RecruitmentPhases Configuration
