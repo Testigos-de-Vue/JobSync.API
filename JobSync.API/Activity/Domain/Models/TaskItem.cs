@@ -1,5 +1,3 @@
-using JobSync.API.Authentication.Domain.Models;
-
 namespace JobSync.API.Activity.Domain.Models;
 
 public class TaskItem
