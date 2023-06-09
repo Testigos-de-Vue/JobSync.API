@@ -1,5 +1,3 @@
-using JobSync.API.Authentication.Domain.Models;
-
 namespace JobSync.API.Activity.Domain.Models;
 
 public class TaskItem
@@ -8,7 +6,8 @@ public class TaskItem
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime Date { get; set; }
-   
+    public string Status { get; set; }
+
     //Relationships
     public int UserId { get; set; }
 }
