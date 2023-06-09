@@ -1,5 +1,6 @@
 using JobSync.API.Activity.Domain.Models;
 using JobSync.API.Authentication.Domain.Models;
+using JobSync.API.Organization.Domain.Models;
 using JobSync.API.Profile.Domain.Models;
 using JobSync.API.Recruitment.Domain.Models;
 using JobSync.API.Shared.Extensions;
@@ -15,6 +16,9 @@ public class AppDbContext : DbContext
   public DbSet<TaskItem> TaskItems {get; set;}
   public DbSet<Phase> Phases { get; set; }
   public DbSet<Process> Processes { get; set; }
+  
+  public DbSet<Plan> Plans { get; set; }
+  public DbSet<JobSync.API.Organization.Domain.Models.Organization> Organizations { get; set; }
 
   public AppDbContext(DbContextOptions options) : base(options)
   {
@@ -76,6 +80,22 @@ public class AppDbContext : DbContext
     builder.Entity<Process>().Property(p=>p.EndingDate).IsRequired();
     builder.Entity<Process>().Property(p=>p.Status).IsRequired();
     
+    // Organizations Configuration
+    builder.Entity<Organization.Domain.Models.Organization>().ToTable("Organizations");
+    builder.Entity<Organization.Domain.Models.Organization>().HasKey(o=>o.Id);
+    builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.Name).IsRequired().HasMaxLength(256);
+    builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.Email).IsRequired().HasMaxLength(64);
+    builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.PhoneNumber).IsRequired().HasMaxLength(16);
+    builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.LogoUrl).IsRequired().HasMaxLength(64);
+    builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.Address).IsRequired().HasMaxLength(256);
+
+    //Plans Configuration
+    builder.Entity<Plan>().ToTable("Plans");
+    builder.Entity<Plan>().HasKey(pl=>pl.Id);
+    builder.Entity<Plan>().Property(pl=>pl.Id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<Plan>().Property(pl=>pl.Name).IsRequired().HasMaxLength(64);
+    
     // Relationships
     builder.Entity<JobSync.API.Profile.Domain.Models.Profile>()
       .HasOne(p => p.Role)
@@ -92,6 +112,11 @@ public class AppDbContext : DbContext
       .WithOne(p => p.Process)
       .HasForeignKey(p => p.RecruitmentProcessId);
 
+    builder.Entity<Organization.Domain.Models.Organization>()
+      .HasOne(o => o.OrganizationPlan)
+      .WithMany(p => p.Organizations)
+      .HasForeignKey(o => o.OrganizationPlanId);
+    
     // Apply Snake Case Naming Convention
     builder.UseSnakeCaseNamingConvention();
   }
