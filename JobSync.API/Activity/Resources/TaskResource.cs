@@ -9,5 +9,5 @@ public class TaskResource
     public string Description { get; set; }
     public DateTime Date { get; set; }
     
-    public UserResource User { get; set; }
+    public int UserId { get; set; }
 }
