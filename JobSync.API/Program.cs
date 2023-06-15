@@ -10,6 +10,10 @@ using JobSync.API.Profile.Domain.Repositories;
 using JobSync.API.Profile.Domain.Services;
 using JobSync.API.Profile.Persistence.Repositories;
 using JobSync.API.Profile.Services;
+using JobSync.API.Recruitment.Domain.Repositories;
+using JobSync.API.Recruitment.Domain.Services;
+using JobSync.API.Recruitment.Persistence.Repositories;
+using JobSync.API.Recruitment.Services;
 using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
@@ -77,20 +81,29 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
+// Recruitment Bounded Context Injection Configuration
+builder.Services.AddScoped<IPhaseService, PhaseService>();
+builder.Services.AddScoped<IPhaseRepository, PhaseRepository>();
+builder.Services.AddScoped<IProcessService, ProcessService>();
+builder.Services.AddScoped<IProcessRepository, ProcessRepository>();
+
+
 // AutoMapper Configuration
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Authentication.Mapping.ModelToResourceProfile),
   typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
 );
-
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Profile.Mapping.ModelToResourceProfile),
   typeof(JobSync.API.Profile.Mapping.ResourceToModelProfile)
 );
-
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Activity.Mapping.ModelToResourceProfile),
   typeof(JobSync.API.Activity.Mapping.ResourceToModelProfile)
+);
+builder.Services.AddAutoMapper(
+  typeof(JobSync.API.Recruitment.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Recruitment.Mapping.ResourceToModelProfile)
 );
 
 // Application Build
