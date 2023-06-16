@@ -5,12 +5,14 @@ using JobSync.API.Recruitment.Domain.Services;
 using JobSync.API.Recruitment.Resources;
 using JobSync.API.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobSync.API.Recruitment.Interfaces.Rest.Controllers;
 
 [ApiController]
 [Route("api/v1/recruitment/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[SwaggerTag("Create, read, update and delete Recruitment Phases")]
 public class PhasesController: ControllerBase
 {
     private readonly IPhaseService _phaseService;

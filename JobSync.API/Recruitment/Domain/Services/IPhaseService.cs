@@ -11,4 +11,5 @@ public interface IPhaseService
     Task<PhaseResponse> UpdateAsync(int id, Phase phase);
     Task<PhaseResponse> DeleteAsync(int id);
     Task<PhaseResponse> PhaseCountByProcessIdAsync(int processId);
+    Task<IEnumerable<Phase>> ListByProcessIdAsync(int processId);
 }
