@@ -2,6 +2,7 @@
 using JobSync.API.Recruitment.Domain.Repositories;
 using JobSync.API.Recruitment.Domain.Services;
 using JobSync.API.Recruitment.Domain.Services.Communication;
+using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Repositories;
 
 namespace JobSync.API.Recruitment.Services;
@@ -9,10 +10,10 @@ namespace JobSync.API.Recruitment.Services;
 public class PhaseService: IPhaseService
 {
     private readonly IPhaseRepository _phaseRepository;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IProcessRepository _processRepository;
 
-    public PhaseService(IPhaseRepository phaseRepository, UnitOfWork unitOfWork, IProcessRepository processRepository)
+    public PhaseService(IPhaseRepository phaseRepository, IUnitOfWork unitOfWork, IProcessRepository processRepository)
     {
         _phaseRepository = phaseRepository;
         _unitOfWork = unitOfWork;
@@ -105,5 +106,10 @@ public class PhaseService: IPhaseService
         {
             return new PhaseResponse($"An error occurred while getting the count of phases in process with id {processId}: {e.Message}.");
         }
+    }
+
+    public async Task<IEnumerable<Phase>> ListByProcessIdAsync(int processId)
+    {
+        return await _phaseRepository.FinByProcessIdAsync(processId);
     }
 }
