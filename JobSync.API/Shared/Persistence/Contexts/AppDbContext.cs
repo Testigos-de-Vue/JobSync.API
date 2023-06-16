@@ -58,7 +58,7 @@ public class AppDbContext : DbContext
     builder.Entity<TaskItem>().Property(t=>t.Date).IsRequired();
 
     // RecruitmentPhases Configuration
-    builder.Entity<Phase>().ToTable("RecruitmentPhases");
+    builder.Entity<Phase>().ToTable("Phases");
     builder.Entity<Phase>().HasKey(p=>p.Id);
     builder.Entity<Phase>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<Phase>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
@@ -66,7 +66,7 @@ public class AppDbContext : DbContext
     builder.Entity<Phase>().Property(p=>p.CreatedDate).IsRequired();
     
     // RecruitmentProcesses Configuration
-    builder.Entity<Process>().ToTable("RecruitmentProcesses");
+    builder.Entity<Process>().ToTable("Processes");
     builder.Entity<Process>().HasKey(p=>p.Id);
     builder.Entity<Process>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<Process>().Property(p=>p.Name).IsRequired().HasMaxLength(64);

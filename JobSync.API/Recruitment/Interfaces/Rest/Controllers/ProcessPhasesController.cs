@@ -25,7 +25,7 @@ public class ProcessPhasesController: ControllerBase
     [HttpGet]
     [SwaggerOperation(
         Summary = "Get All Phases by Given Process",
-        Description = "Get existing Phases from the Give Process Id",
+        Description = "Get existing Phases from the Given Process Id",
         OperationId = "GetProcessPhases",
         Tags = new []{"Processes"})]
     public async Task<IEnumerable<PhaseResource>> GetAllByProcessId(int processId)
