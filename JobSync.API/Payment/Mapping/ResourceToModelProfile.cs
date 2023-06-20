@@ -1,6 +1,12 @@
-﻿namespace JobSync.API.Payment.Mapping;
+﻿using JobSync.API.Payment.Domain.Models;
+using JobSync.API.Payment.Resources;
 
-public class ResourceToModelProfile
+namespace JobSync.API.Payment.Mapping;
+
+public class ResourceToModelProfile : AutoMapper.Profile
 {
-    
+    public ResourceToModelProfile()
+    {
+        CreateMap<PaymentPlanResource, PaymentPlan>();
+    }
 }

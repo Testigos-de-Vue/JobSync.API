@@ -2,6 +2,7 @@
 using JobSync.API.Payment.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobSync.API.Payment.Persistence.Repositories;
 
@@ -13,26 +14,26 @@ public class PaymentPlanRepository : BaseRepository, IPaymentPlanRepository
 
     public async Task<IEnumerable<PaymentPlan>> ListAsync()
     {
-        throw new NotImplementedException();
+        return await Context.PaymentPlans.ToListAsync();
     }
 
     public async Task AddAsync(PaymentPlan plan)
     {
-        throw new NotImplementedException();
+        await Context.PaymentPlans.AddAsync(plan);
     }
 
     public async Task<PaymentPlan> FindByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await Context.PaymentPlans.FindAsync(id);
     }
 
     public void Update(PaymentPlan plan)
     {
-        throw new NotImplementedException();
+        Context.PaymentPlans.Update(plan);
     }
 
     public void Remove(PaymentPlan plan)
     {
-        throw new NotImplementedException();
+        Context.PaymentPlans.Remove(plan);
     }
 }

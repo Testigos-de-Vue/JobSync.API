@@ -1,6 +1,7 @@
 using JobSync.API.Activity.Domain.Models;
 using JobSync.API.Authentication.Domain.Models;
 using JobSync.API.Organization.Domain.Models;
+using JobSync.API.Payment.Domain.Models;
 using JobSync.API.Profile.Domain.Models;
 using JobSync.API.Recruitment.Domain.Models;
 using JobSync.API.Shared.Extensions;
@@ -18,6 +19,8 @@ public class AppDbContext : DbContext
   public DbSet<Process> Processes { get; set; }
   
   public DbSet<Plan> Plans { get; set; }
+  
+  public DbSet<PaymentPlan> PaymentPlans { get; set; }
   public DbSet<JobSync.API.Organization.Domain.Models.Organization> Organizations { get; set; }
 
   public AppDbContext(DbContextOptions options) : base(options)
@@ -95,6 +98,15 @@ public class AppDbContext : DbContext
     builder.Entity<Plan>().HasKey(pl=>pl.Id);
     builder.Entity<Plan>().Property(pl=>pl.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<Plan>().Property(pl=>pl.Name).IsRequired().HasMaxLength(64);
+    
+    //Payment Plans Configuration
+    builder.Entity<PaymentPlan>().ToTable("PaymentPlans");
+    builder.Entity<PaymentPlan>().HasKey(p => p.id);
+    builder.Entity<PaymentPlan>().Property(p=>p.id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<PaymentPlan>().Property(p => p.name).IsRequired().HasMaxLength(30);
+    builder.Entity<PaymentPlan>().Property(p => p.initialPrice).IsRequired();
+    builder.Entity<PaymentPlan>().Property(p => p.interest).IsRequired();
+    builder.Entity<PaymentPlan>().Property(p => p.lapse).IsRequired();
     
     // Relationships
     builder.Entity<JobSync.API.Profile.Domain.Models.Profile>()
