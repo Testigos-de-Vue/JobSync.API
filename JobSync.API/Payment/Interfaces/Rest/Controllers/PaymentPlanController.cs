@@ -1,6 +1,8 @@
 ﻿using System.Net.Mime;
 using AutoMapper;
+using JobSync.API.Payment.Domain.Models;
 using JobSync.API.Payment.Domain.Services;
+using JobSync.API.Payment.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobSync.API.Payment.Interfaces.Rest.Controllers;
@@ -17,5 +19,14 @@ public class PaymentPlanController : ControllerBase
     {
         _planService = planService;
         _mapper = mapper;
+    }
+    
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<PaymentPlanResource>), 200)]
+    public async Task<IEnumerable<PaymentPlanResource>> GetAllAsync()
+    {
+        var plans = await _planService.ListAsync();
+        var resources = _mapper.Map<IEnumerable<PaymentPlan>, IEnumerable<PaymentPlanResource>>(plans);
+        return resources;
     }
 }
