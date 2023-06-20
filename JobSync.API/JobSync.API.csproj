@@ -20,11 +20,6 @@
 
     <ItemGroup>
       <Folder Include="Authentication\Interfaces\Internal\" />
-      <Folder Include="Payment\Interfaces\" />
-      <Folder Include="Payment\Mapping\" />
-      <Folder Include="Payment\Persistence\" />
-      <Folder Include="Payment\Resources\" />
-      <Folder Include="Payment\Services\" />
       <Folder Include="Profile\Interfaces\Internal\" />
     </ItemGroup>
 
