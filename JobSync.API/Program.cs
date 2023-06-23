@@ -16,6 +16,7 @@ using JobSync.API.Recruitment.Persistence.Repositories;
 using JobSync.API.Recruitment.Services;
 using JobSync.API.Security.Authorization.Handlers.Implementations;
 using JobSync.API.Security.Authorization.Handlers.Interfaces;
+using JobSync.API.Security.Authorization.Settings;
 using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
@@ -28,6 +29,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddSwaggerGen(options =>
 {
   options.SwaggerDoc("v1", new OpenApiInfo

@@ -30,9 +30,7 @@ public class JwtHandler : IJwtHandler
         new Claim(ClaimTypes.Sid, user.Id.ToString()),
         new Claim(ClaimTypes.Name, user.Email),
       }),
-            
       Expires = DateTime.UtcNow.AddDays(31),
-
       SigningCredentials = new SigningCredentials(
         new SymmetricSecurityKey(key),
         SecurityAlgorithms.HmacSha512Signature
