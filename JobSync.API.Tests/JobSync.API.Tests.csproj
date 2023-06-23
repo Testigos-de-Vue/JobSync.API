@@ -21,16 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\" />
-      <Folder Include="Steps\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Steps\CalculatorStepDefinitions.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <SpecFlowFeatureFiles Remove="Features\Calculator.feature" />
+      <ProjectReference Include="..\JobSync.API\JobSync.API.csproj" />
     </ItemGroup>
 
 </Project>
