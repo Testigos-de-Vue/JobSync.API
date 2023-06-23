@@ -1,5 +1,5 @@
 using JobSync.API.Activity.Domain.Models;
-using JobSync.API.Authentication.Domain.Models;
+using JobSync.API.Security.Domain.Models;
 using JobSync.API.Organization.Domain.Models;
 using JobSync.API.Payment.Domain.Models;
 using JobSync.API.Profile.Domain.Models;
@@ -37,11 +37,11 @@ public class AppDbContext : DbContext
     builder.Entity<User>().ToTable("Users");
     builder.Entity<User>().HasKey(u => u.Id);
     builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
-    builder.Entity<User>().Property(u => u.Name).IsRequired().HasMaxLength(32);
+    builder.Entity<User>().Property(u => u.FirstName).IsRequired().HasMaxLength(32);
     builder.Entity<User>().Property(u => u.LastName).IsRequired().HasMaxLength(64);
     builder.Entity<User>().Property(u => u.Email).IsRequired().HasMaxLength(64);
     builder.Entity<User>().Property(u => u.ImageUrl).IsRequired().HasMaxLength(256);
-    builder.Entity<User>().Property(u => u.Password).IsRequired();
+    builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
     builder.Entity<User>().Property(u => u.IsSubscribedToNewsletter).IsRequired();
     builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
     
