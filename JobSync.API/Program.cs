@@ -14,6 +14,8 @@ using JobSync.API.Recruitment.Domain.Repositories;
 using JobSync.API.Recruitment.Domain.Services;
 using JobSync.API.Recruitment.Persistence.Repositories;
 using JobSync.API.Recruitment.Services;
+using JobSync.API.Security.Authorization.Handlers.Implementations;
+using JobSync.API.Security.Authorization.Handlers.Interfaces;
 using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
@@ -72,6 +74,7 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
 // Authentication Bounded Context Injection Configuration
+builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
