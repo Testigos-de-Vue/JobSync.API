@@ -20,7 +20,7 @@ public class AppDbContext : DbContext
   
   public DbSet<Plan> Plans { get; set; }
   
-  public DbSet<Pay> Pays { get; set; }
+  public DbSet<Transaction> Transactions { get; set; }
 
   public DbSet<PaymentPlan> PaymentPlans { get; set; }
   public DbSet<JobSync.API.Organization.Domain.Models.Organization> Organizations { get; set; }
@@ -102,11 +102,11 @@ public class AppDbContext : DbContext
     builder.Entity<Plan>().Property(pl=>pl.Name).IsRequired().HasMaxLength(64);
     
     //Pays Configutation
-    builder.Entity<Pay>().ToTable("Pays");
-    builder.Entity<Pay>().HasKey(p => p.id);
-    builder.Entity<Pay>().Property(p => p.id).IsRequired().ValueGeneratedOnAdd();
-    builder.Entity<Pay>().Property(p => p.mount).IsRequired();
-    builder.Entity<Pay>().Property(p => p.currency).IsRequired().HasMaxLength(12);
+    builder.Entity<Transaction>().ToTable("Transactions");
+    builder.Entity<Transaction>().HasKey(p => p.id);
+    builder.Entity<Transaction>().Property(p => p.id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<Transaction>().Property(p => p.mount).IsRequired();
+    builder.Entity<Transaction>().Property(p => p.currency).IsRequired().HasMaxLength(12);
     
     //Payment Plans Configuration
     builder.Entity<PaymentPlan>().ToTable("PaymentPlans");

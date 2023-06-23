@@ -11,39 +11,39 @@ namespace JobSync.API.Payment.Interfaces.Rest.Controllers;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class PayController : ControllerBase
+public class TransactionController : ControllerBase
 {
-    private readonly IPayService _payService;
+    private readonly ITransactionService _transactionService;
     private readonly IMapper _mapper;
     
-    public PayController(IPayService payService, IMapper mapper)
+    public TransactionController(ITransactionService transactionService, IMapper mapper)
     {
-        _payService = payService;
+        _transactionService = transactionService;
         _mapper = mapper;
     }
     
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<PayResource>), 200)]
+    [ProducesResponseType(typeof(IEnumerable<TransactionResource>), 200)]
     public async Task<IEnumerable<PaymentPlanResource>> GetAllAsync()
     {
-        var pays = await _payService.ListAsync();
-        var resources = _mapper.Map<IEnumerable<Pay>, IEnumerable<PaymentPlanResource>>(pays);
+        var pays = await _transactionService.ListAsync();
+        var resources = _mapper.Map<IEnumerable<Transaction>, IEnumerable<PaymentPlanResource>>(pays);
         return resources;
     }
     
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] PayResource resource)
+    public async Task<IActionResult> PostAsync([FromBody] TransactionResource resource)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState.GetErrorMessages());
 
-        var pay = _mapper.Map<PayResource, Pay>(resource);
-        var result = await _payService.CreateAsync(pay);
+        var pay = _mapper.Map<TransactionResource, Transaction>(resource);
+        var result = await _transactionService.CreateAsync(pay);
     
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var payResource = _mapper.Map<Pay, PayResource>(result.Resource);
+        var payResource = _mapper.Map<Transaction, TransactionResource>(result.Resource);
     
         return Created(nameof(PostAsync), payResource);
     }

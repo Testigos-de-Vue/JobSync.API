@@ -7,7 +7,7 @@ public class ModelToResourceProfile : AutoMapper.Profile
 {
     public ModelToResourceProfile()
     {
-        CreateMap<Pay, PayResource>();
+        CreateMap<Transaction, TransactionResource>();
         CreateMap<PaymentPlan, PaymentPlanResource>();
     }
 }
