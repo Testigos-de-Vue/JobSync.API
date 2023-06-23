@@ -1,7 +1,7 @@
-﻿using JobSync.API.Authentication.Domain.Models;
-using JobSync.API.Authentication.Resources;
+﻿using JobSync.API.Security.Domain.Models;
+using JobSync.API.Security.Resources;
 
-namespace JobSync.API.Authentication.Mapping;
+namespace JobSync.API.Security.Mapping;
 
 public class ResourceToModelProfile : AutoMapper.Profile
 {

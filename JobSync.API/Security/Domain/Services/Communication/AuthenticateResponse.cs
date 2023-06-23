@@ -1,7 +1,7 @@
-﻿using JobSync.API.Authentication.Resources;
+﻿using JobSync.API.Security.Resources;
 using JobSync.API.Shared.Domain.Services.Communication;
 
-namespace JobSync.API.Authentication.Domain.Services.Communication;
+namespace JobSync.API.Security.Domain.Services.Communication;
 
 public class AuthenticateResponse
 {

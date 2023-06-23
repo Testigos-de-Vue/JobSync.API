@@ -1,4 +1,4 @@
-﻿namespace JobSync.API.Authentication.Resources;
+﻿namespace JobSync.API.Security.Resources;
 
 public class UserResource
 {

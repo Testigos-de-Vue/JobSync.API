@@ -1,6 +1,6 @@
-﻿using JobSync.API.Authentication.Domain.Services.Communication;
+﻿using JobSync.API.Security.Domain.Services.Communication;
 
-namespace JobSync.API.Authentication.Domain.Services;
+namespace JobSync.API.Security.Domain.Services;
 
 public interface IAuthenticationService
 {

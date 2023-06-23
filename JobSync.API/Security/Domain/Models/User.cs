@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using JobSync.API.Recruitment.Domain.Models;
 
-namespace JobSync.API.Authentication.Domain.Models;
+namespace JobSync.API.Security.Domain.Models;
 
 public class User
 {

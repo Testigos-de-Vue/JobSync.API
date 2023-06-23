@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JobSync.API.Authentication.Domain.Services.Communication;
+namespace JobSync.API.Security.Domain.Services.Communication;
 
 public class AuthenticateRequest
 {

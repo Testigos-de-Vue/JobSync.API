@@ -1,10 +1,10 @@
-﻿using JobSync.API.Authentication.Domain.Models;
-using JobSync.API.Authentication.Domain.Repositories;
+﻿using JobSync.API.Security.Domain.Models;
+using JobSync.API.Security.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace JobSync.API.Authentication.Persistence.Repositories;
+namespace JobSync.API.Security.Persistence.Repositories;
 
 public class UserRepository : BaseRepository, IUserRepository
 {

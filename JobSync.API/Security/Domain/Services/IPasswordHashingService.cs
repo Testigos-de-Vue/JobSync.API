@@ -1,4 +1,4 @@
-﻿namespace JobSync.API.Authentication.Domain.Services;
+﻿namespace JobSync.API.Security.Domain.Services;
 
 public interface IPasswordHashingService
 {

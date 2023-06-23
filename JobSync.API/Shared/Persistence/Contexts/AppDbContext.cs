@@ -1,5 +1,5 @@
 using JobSync.API.Activity.Domain.Models;
-using JobSync.API.Authentication.Domain.Models;
+using JobSync.API.Security.Domain.Models;
 using JobSync.API.Organization.Domain.Models;
 using JobSync.API.Payment.Domain.Models;
 using JobSync.API.Profile.Domain.Models;

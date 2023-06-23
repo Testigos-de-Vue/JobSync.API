@@ -1,14 +1,14 @@
 using System.Net.Mime;
 
 using AutoMapper;
-using JobSync.API.Authentication.Domain.Models;
-using JobSync.API.Authentication.Domain.Services;
-using JobSync.API.Authentication.Resources;
+using JobSync.API.Security.Domain.Models;
+using JobSync.API.Security.Domain.Services;
+using JobSync.API.Security.Resources;
 using JobSync.API.Shared.Extensions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JobSync.API.Authentication.Interfaces.Rest.Controllers;
+namespace JobSync.API.Security.Interfaces.Rest.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

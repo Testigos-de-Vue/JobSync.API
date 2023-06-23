@@ -2,10 +2,10 @@ using JobSync.API.Activity.Domain.Repositories;
 using JobSync.API.Activity.Domain.Services;
 using JobSync.API.Activity.Persistence.Repositories;
 using JobSync.API.Activity.Services;
-using JobSync.API.Authentication.Domain.Repositories;
-using JobSync.API.Authentication.Domain.Services;
-using JobSync.API.Authentication.Persistence.Repositories;
-using JobSync.API.Authentication.Services;
+using JobSync.API.Security.Domain.Repositories;
+using JobSync.API.Security.Domain.Services;
+using JobSync.API.Security.Persistence.Repositories;
+using JobSync.API.Security.Services;
 using JobSync.API.Profile.Domain.Repositories;
 using JobSync.API.Profile.Domain.Services;
 using JobSync.API.Profile.Persistence.Repositories;
@@ -90,8 +90,8 @@ builder.Services.AddScoped<IProcessRepository, ProcessRepository>();
 
 // AutoMapper Configuration
 builder.Services.AddAutoMapper(
-  typeof(JobSync.API.Authentication.Mapping.ModelToResourceProfile),
-  typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
+  typeof(JobSync.API.Security.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Security.Mapping.ResourceToModelProfile)
 );
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Profile.Mapping.ModelToResourceProfile),

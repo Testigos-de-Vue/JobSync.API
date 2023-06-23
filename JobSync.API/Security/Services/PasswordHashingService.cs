@@ -1,6 +1,6 @@
-﻿using JobSync.API.Authentication.Domain.Services;
+﻿using JobSync.API.Security.Domain.Services;
 
-namespace JobSync.API.Authentication.Services;
+namespace JobSync.API.Security.Services;
 
 public class PasswordHashingService : IPasswordHashingService
 {

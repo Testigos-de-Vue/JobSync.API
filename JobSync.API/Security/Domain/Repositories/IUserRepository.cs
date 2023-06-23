@@ -1,6 +1,6 @@
-﻿using JobSync.API.Authentication.Domain.Models;
+﻿using JobSync.API.Security.Domain.Models;
 
-namespace JobSync.API.Authentication.Domain.Repositories;
+namespace JobSync.API.Security.Domain.Repositories;
 
 public interface IUserRepository
 {

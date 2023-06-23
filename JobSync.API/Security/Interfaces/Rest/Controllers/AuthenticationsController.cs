@@ -1,10 +1,10 @@
 
 ﻿using System.Net.Mime;
-using JobSync.API.Authentication.Domain.Services;
-using JobSync.API.Authentication.Domain.Services.Communication;
-using Microsoft.AspNetCore.Mvc;
+ using JobSync.API.Security.Domain.Services;
+ using JobSync.API.Security.Domain.Services.Communication;
+ using Microsoft.AspNetCore.Mvc;
 
-namespace JobSync.API.Authentication.Interfaces.Rest.Controllers;
+namespace JobSync.API.Security.Interfaces.Rest.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

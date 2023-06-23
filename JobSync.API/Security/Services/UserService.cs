@@ -1,10 +1,10 @@
-﻿using JobSync.API.Authentication.Domain.Models;
-using JobSync.API.Authentication.Domain.Repositories;
-using JobSync.API.Authentication.Domain.Services;
-using JobSync.API.Authentication.Domain.Services.Communication;
+﻿using JobSync.API.Security.Domain.Models;
+using JobSync.API.Security.Domain.Repositories;
+using JobSync.API.Security.Domain.Services;
+using JobSync.API.Security.Domain.Services.Communication;
 using JobSync.API.Shared.Domain.Repositories;
 
-namespace JobSync.API.Authentication.Services;
+namespace JobSync.API.Security.Services;
 
 public class UserService : IUserService
 {

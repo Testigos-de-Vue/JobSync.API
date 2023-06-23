@@ -1,9 +1,9 @@
-﻿using JobSync.API.Authentication.Domain.Repositories;
-using JobSync.API.Authentication.Domain.Services;
-using JobSync.API.Authentication.Domain.Services.Communication;
-using JobSync.API.Authentication.Persistence.Repositories;
+﻿using JobSync.API.Security.Persistence.Repositories;
+using JobSync.API.Security.Domain.Repositories;
+using JobSync.API.Security.Domain.Services;
+using JobSync.API.Security.Domain.Services.Communication;
 
-namespace JobSync.API.Authentication.Services;
+namespace JobSync.API.Security.Services;
 
 public class AuthenticationService : IAuthenticationService
 {
