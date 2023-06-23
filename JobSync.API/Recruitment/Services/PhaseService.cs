@@ -88,26 +88,6 @@ public class PhaseService: IPhaseService
         }
     }
 
-    public async Task<PhaseResponse> PhaseCountByProcessIdAsync(int processId)
-    {
-        // Validate if recruitment process exists
-        var existingProcess = await _processRepository.FindByIdAsync(processId);
-        if (existingProcess == null)
-            return new PhaseResponse("Invalid recruitment process.");
-    
-        try
-        {
-            var phaseCount = _phaseRepository.FinByProcessIdAsync(processId).Result.Count();
-            await _unitOfWork.CompleteAsync();
-
-            return new PhaseResponse(phaseCount.ToString());
-        }
-        catch (Exception e)
-        {
-            return new PhaseResponse($"An error occurred while getting the count of phases in process with id {processId}: {e.Message}.");
-        }
-    }
-
     public async Task<IEnumerable<Phase>> ListByProcessIdAsync(int processId)
     {
         return await _phaseRepository.FinByProcessIdAsync(processId);
