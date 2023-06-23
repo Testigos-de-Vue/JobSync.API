@@ -12,6 +12,7 @@ public class UserRepository : BaseRepository, IUserRepository
   {
   }
 
+
   public async Task<IEnumerable<User>> ListAsync()
   {
     return await Context.Users.ToListAsync();
@@ -29,9 +30,17 @@ public class UserRepository : BaseRepository, IUserRepository
 
   public async Task<User> FindByEmailAsync(string email)
   {
-    return await Context.Users
-        .Include(u => u.Email)
-        .FirstOrDefaultAsync(u => u.Email == email);
+    return await Context.Users.SingleOrDefaultAsync(user => user.Email == email);
+  }
+
+  public bool ExistsByEmail(string email)
+  {
+    return Context.Users.Any(user => user.Email == email);
+  }
+
+  public User FindById(int id)
+  {
+    return Context.Users.Find(id);
   }
 
   public void Update(User user)
@@ -41,6 +50,6 @@ public class UserRepository : BaseRepository, IUserRepository
 
   public void Remove(User user)
   {
-    Context.Remove(user);
+    Context.Users.Remove(user);
   }
 }
