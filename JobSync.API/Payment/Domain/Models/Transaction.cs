@@ -1,6 +1,6 @@
 ﻿namespace JobSync.API.Payment.Domain.Models;
 
-public class Pay
+public class Transaction
 {
     public int id { get; set; }
     public float mount { get; set; }
