@@ -21,6 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Security\Authorization\" />
+      <Folder Include="Security\Exceptions\" />
       <Folder Include="Security\Interfaces\Internal\" />
       <Folder Include="Profile\Interfaces\Internal\" />
     </ItemGroup>
