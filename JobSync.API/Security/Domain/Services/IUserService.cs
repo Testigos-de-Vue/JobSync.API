@@ -5,8 +5,10 @@ namespace JobSync.API.Security.Domain.Services;
 
 public interface IUserService
 {
-    Task<IEnumerable<User>> ListAsync();
-    Task<UserResponse> CreateAsync(User user);
-    Task<UserResponse> UpdateAsync(int id, User user);
-    Task<UserResponse> DeleteAsync(int id);
+  Task<AuthenticateResponse> AuthenticateAsync(AuthenticateRequest model);
+  Task<IEnumerable<User>> ListAsync();
+  Task<User> GetByIdAsync(int id);
+  Task RegisterAsync(RegisterRequest mode);
+  Task UpdateAsync(int id, UpdateRequest model);
+  Task DeleteAsync(int id);
 }
