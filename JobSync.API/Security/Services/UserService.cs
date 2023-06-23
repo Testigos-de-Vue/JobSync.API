@@ -115,7 +115,10 @@ public class UserService : IUserService
   private User GetById(int id)
   {
     var user = _userRepository.FindById(id);
-    if (user == null) throw new KeyNotFoundException("User not found");
+    
+    if (user == null) 
+      throw new KeyNotFoundException("User not found");
+    
     return user;
   }
 }

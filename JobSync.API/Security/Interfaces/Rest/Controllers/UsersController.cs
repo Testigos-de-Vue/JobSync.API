@@ -1,11 +1,11 @@
 using System.Net.Mime;
 
 using AutoMapper;
+using JobSync.API.Security.Authorization.Attributes;
 using JobSync.API.Security.Domain.Models;
 using JobSync.API.Security.Domain.Services;
+using JobSync.API.Security.Domain.Services.Communication;
 using JobSync.API.Security.Resources;
-using JobSync.API.Shared.Extensions;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobSync.API.Security.Interfaces.Rest.Controllers;
@@ -24,60 +24,26 @@ public class UsersController : ControllerBase
     _mapper = mapper;
   }
   
+  [AllowAnonymous]
+  [HttpPost("sign-in")]
+  public async Task<IActionResult> Authenticate(AuthenticateRequest request)
+  {
+    var response = await _userService.AuthenticateAsync(request);
+    return Ok(response);
+  }
+
+  [HttpPost("sign-up")]
+  public async Task<IActionResult> Register(RegisterRequest request)
+  {
+    await _userService.RegisterAsync(request);
+    return Ok(new { message = "Registration successful" });
+  }
+
   [HttpGet]
-  [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
-  public async Task<IEnumerable<UserResource>> GetAllAsync()
+  public async Task<IActionResult> GetAll()
   {
     var users = await _userService.ListAsync();
     var resources = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users);
-    return resources;
+    return Ok(resources);
   }
-
-  [HttpPost]
-  public async Task<IActionResult> PostAsync([FromBody] UserResource resource)
-  {
-    if (!ModelState.IsValid)
-      return BadRequest(ModelState.GetErrorMessages());
-
-    var user = _mapper.Map<UserResource, User>(resource);
-    var result = await _userService.CreateAsync(user);
-    
-    if (!result.Success)
-      return BadRequest(result.Message);
-
-    var userResource = _mapper.Map<User, UserResource>(result.Resource);
-    
-    return Created(nameof(PostAsync), userResource);
-  }
-
-  [HttpPut("{id}")]
-  public async Task<IActionResult> PutAsync(int id, [FromBody] UserResource resource)
-  {
-    if (!ModelState.IsValid)
-      return BadRequest(ModelState.GetErrorMessages());
-
-    var user = _mapper.Map<UserResource, User>(resource);
-    var result = await _userService.UpdateAsync(id, user);
-    
-    if (!result.Success)
-      return BadRequest(result.Message);
-
-    var userResource = _mapper.Map<User, UserResource>(result.Resource);
-    
-    return Ok(userResource);
-  }
-
-  [HttpDelete("{id}")]
-  public async Task<IActionResult> DeleteAsync(int id)
-  {
-    var result = await _userService.DeleteAsync(id);
-    
-    if (!result.Success)
-      return BadRequest(result.Message);
-
-    var userResource = _mapper.Map<User, UserResource>(result.Resource);
-    
-    return Ok(userResource);
-  }
-
 }
