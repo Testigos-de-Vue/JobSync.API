@@ -75,7 +75,6 @@ builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 // Activity Bounded Context Injection Configuration
 builder.Services.AddScoped<ITaskService, TaskService>();
