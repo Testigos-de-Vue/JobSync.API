@@ -5,15 +5,16 @@ namespace JobSync.API.Recruitment.Services;
 
 public class RecruitmentContextFacade: IRecruitmentContextFacade
 {
-    private readonly IPhaseService _phaseService;
+    private readonly IProcessService _processService;
 
     public int PhasesByProcessId(int processId)
     {
-        throw new NotImplementedException();
+        return _processService.FindByIdAsync(processId).Result.Phases.Count();
     }
 
     public int CandidatesByProcessId(int processId)
     {
-        throw new NotImplementedException();
+        return _processService.FindByIdAsync(processId).Result.Phases
+            .Sum(phase => phase.ProfileIds.Count());
     }
 }
