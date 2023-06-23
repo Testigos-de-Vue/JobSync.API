@@ -58,7 +58,7 @@ public class UserService : IUserService
   {
     if (_userRepository.ExistsByEmail(model.Email))
       throw new AppException($"Email '{model.Email}'is already taken");
-        
+    
     var user = _mapper.Map<User>(model);
     user.PasswordHash = _passwordHashingService.GetHash(model.Password);
         

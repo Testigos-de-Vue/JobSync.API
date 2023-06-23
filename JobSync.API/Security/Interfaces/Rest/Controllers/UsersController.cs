@@ -35,8 +35,15 @@ public class UsersController : ControllerBase
   [HttpPost("sign-up")]
   public async Task<IActionResult> Register(RegisterRequest request)
   {
-    await _userService.RegisterAsync(request);
-    return Ok(new { message = "Registration successful" });
+    try
+    {
+      await _userService.RegisterAsync(request);
+      return Ok(new { message = "Registration successful" });
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
   }
 
   [HttpGet]
