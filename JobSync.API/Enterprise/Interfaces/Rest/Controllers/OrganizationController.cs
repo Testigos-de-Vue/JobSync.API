@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobSync.API.Organization.Interfaces.Rest.Controllers;
 
 [ApiController]
-[Route("api/v1/enterprise/[controller]")]
+[Route("api/v1/enterprise/organizations")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Create, read, update and delete Organizations")]
 
@@ -26,6 +26,10 @@ public class OrganizationController : ControllerBase
     
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<OrganizationResource>), 200)]
+    [SwaggerOperation(
+        Summary = "Get All Organizations",
+        Description = "Get All Organizations",
+        OperationId = "GetAllOrganizations")]
     public async Task<IEnumerable<OrganizationResource>> GetAllAsync()
     {
         var organizations = await _organizationService.ListAsync();
@@ -46,8 +50,11 @@ public class OrganizationController : ControllerBase
         return resource;
     }
     
-        
     [HttpPost]
+    [SwaggerOperation(
+        Summary = "Create new Organization",
+        Description = "Create new Organization",
+        OperationId = "PostOrganization")]
     public async Task<IActionResult> PostAsync([FromBody] OrganizationResource resource)
     {
         if (!ModelState.IsValid)
@@ -67,6 +74,10 @@ public class OrganizationController : ControllerBase
     }
         
     [HttpPut("{id}")]
+    [SwaggerOperation(
+        Summary = "Update Organization by Id",
+        Description = "Update Organization by Id",
+        OperationId = "PutOrganization")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] OrganizationResource resource)
     {
         if (!ModelState.IsValid)
@@ -86,6 +97,10 @@ public class OrganizationController : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [SwaggerOperation(
+        Summary = "Delete Organization by Id",
+        Description = "Delete Organization by Id",
+        OperationId = "DeleteOrganization")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var result = await  _organizationService.DeleteAsync(id);
