@@ -33,6 +33,20 @@ public class ProcessesController: ControllerBase
         return resources;
     }
     
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(IEnumerable<ProcessResource>), 200)]
+    [SwaggerOperation(
+        Summary = "Get Recruitment Process by Id",
+        Description = "Get Recruitment Process by Id",
+        OperationId = "GetProcessById",
+        Tags = new []{"Processes"})]
+    public async Task<ProcessResource> GetByIdAsync(int id)
+    {
+        var recruitmentProcess = await _processService.FindByIdAsync(id);
+        var resource = _mapper.Map<Process, ProcessResource>(recruitmentProcess);
+        return resource;
+    }
+    
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] SaveProcessResource resource)
     {
