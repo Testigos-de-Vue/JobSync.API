@@ -18,6 +18,6 @@ public class Phase
     [NotMapped]
     public List<int> ProfileIds { get; set; }
     
-    public int RecruitmentProcessId { get; set; }
+    public int ProcessId { get; set; }
     public Process Process { get; set; }
 }

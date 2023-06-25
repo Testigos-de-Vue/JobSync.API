@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobSync.API.Recruitment.Interfaces.Rest.Controllers;
 
 [ApiController]
-[Route("/api/v1/proccess/{processId}/phases")]
+[Route("/api/v1/recruitment/processes/{processId}/phases")]
 [Produces(MediaTypeNames.Application.Json)]
 public class ProcessPhasesController: ControllerBase
 {

@@ -48,7 +48,7 @@ public class PhaseService: IPhaseService
             return new PhaseResponse("Recruitment phase not found.");
         
         // Validate if recruitment process exists
-        var existingProcess = await _processRepository.FindByIdAsync(phase.RecruitmentProcessId);
+        var existingProcess = await _processRepository.FindByIdAsync(phase.ProcessId);
         if (existingProcess == null)
             return new PhaseResponse("Invalid recruitment process.");
         
