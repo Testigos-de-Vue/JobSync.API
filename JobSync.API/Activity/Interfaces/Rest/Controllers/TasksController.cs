@@ -31,6 +31,18 @@ public class TasksController : ControllerBase
         return resources;
     }
     
+    [HttpGet("user/{userId}")]
+    [ProducesResponseType(typeof(IEnumerable<TaskResource>), 200)]
+    public async Task<IEnumerable<TaskResource>> GetAllByUserIdAsync(int userId)
+    {
+        var tasks = await _taskService.GetTasksByUserIdAsync(userId);
+        var resources = _mapper.Map<IEnumerable<TaskItem>, IEnumerable<TaskResource>>(tasks);
+        return resources;
+    }
+
+
+
+
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] TaskResource resource)
     {
