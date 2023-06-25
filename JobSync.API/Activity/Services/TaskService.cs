@@ -66,6 +66,17 @@ public class TaskService : ITaskService
             return new TaskResponse($"An error occurred while updating the task: {e.Message}");
         }
     }
+    
+    public async Task<TaskItem> FIndByIdAsync(int id)
+    {
+        return await _taskRepository.FindByIdAsync(id);
+    }
+    
+    public async Task<IEnumerable<TaskItem>> GetTasksByUserIdAsync(int userId)
+    {
+        return await _taskRepository.GetTasksByUserIdAsync(userId);
+    }
+
 
     public async Task<TaskResponse> DeleteAsync(int id)
     {
