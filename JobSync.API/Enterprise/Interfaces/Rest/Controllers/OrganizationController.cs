@@ -50,6 +50,29 @@ public class OrganizationController : ControllerBase
         return resource;
     }
     
+    [HttpGet]
+    [Route("{id}/profileIds")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<int>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [SwaggerOperation(
+        Summary = "Get All Profile Ids by an Organization Id",
+        Description =  "Get All Profile Ids by an Organization Id",
+        OperationId = "GetProfileIdsByOrganizationId")]
+    public async Task<IActionResult> GetProfileIdsByOrganizationId(int id)
+    {
+        var profileIds = await _organizationService.GetProfileIdsByOrganizationId(id);
+
+        if (profileIds != null && profileIds.Count > 0)
+        {
+            return Ok(profileIds);
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+
+    
     [HttpPost]
     [SwaggerOperation(
         Summary = "Create new Organization",
