@@ -1,7 +1,6 @@
 ﻿using JobSync.API.Organization.Domain.Repositories;
 using JobSync.API.Organization.Domain.Services;
 using JobSync.API.Organization.Domain.Services.Communication;
-using JobSync.API.Organization.Domain.Models;
 using JobSync.API.Shared.Domain.Repositories;
 
 namespace JobSync.API.Organization.Services;
@@ -10,16 +9,34 @@ public class OrganizationService : IOrganizationService
 {
     private readonly IOrganizationRepository _organizationRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IPlanRepository _planRepository;
     
-    public OrganizationService(IOrganizationRepository organizationRepository, IUnitOfWork unitOfWork)
+    public OrganizationService(IOrganizationRepository organizationRepository
+        , IUnitOfWork unitOfWork, IPlanRepository planRepository)
     {
         _organizationRepository = organizationRepository;
         _unitOfWork = unitOfWork;
+        _planRepository = planRepository;
     }
     
     public async Task<IEnumerable<Domain.Models.Organization>> ListAsync()
     {
         return await _organizationRepository.ListAsync();
+    }
+    
+    public async Task<Domain.Models.Organization> FindByIdAsync(int id)
+    {
+        var organization = await _organizationRepository.FindByIdAsync(id);
+    
+        if (organization == null)
+            throw new Exception("Organization not found");
+
+        return organization;
+    }
+    public async Task<List<int>> GetProfileIdsByOrganizationId(int organizationId)
+    {
+        var profileIds = await _organizationRepository.GetProfileIdsByOrganizationId(organizationId);
+        return profileIds;
     }
     
     public async Task<OrganizationResponse> SaveAsync(Domain.Models.Organization organization)
@@ -44,11 +61,16 @@ public class OrganizationService : IOrganizationService
     
     public async Task<OrganizationResponse> UpdateAsync(int organizationId, Domain.Models.Organization organization)
     {
+        // Validate if organization exists
         var existingOrganization = await _organizationRepository.FindByIdAsync(organizationId);
-        
         if (existingOrganization == null)
             return new OrganizationResponse("Organization not found");
 
+        // Validate if plan exists
+        var existingPlan = await _planRepository.FindByIdAsync(organization.OrganizationPlanId);
+        if (existingPlan == null)
+            return new OrganizationResponse("Invalid plan.");
+        
         existingOrganization.Name = organization.Name;
         existingOrganization.Email = organization.Email;
         existingOrganization.PhoneNumber = organization.PhoneNumber;

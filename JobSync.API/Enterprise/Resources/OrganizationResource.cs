@@ -12,5 +12,6 @@ public class OrganizationResource
     public string Address { get; set; }
     
     public PlanResource Plan { get; set; }
-    public List<ProfileResource> Profiles { get; set; }
+    public int PlanId { get; set; }
+    public List<int> ProfilesId { get; set; }
 }

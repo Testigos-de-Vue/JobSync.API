@@ -4,21 +4,23 @@ using JobSync.API.Organization.Domain.Services;
 using JobSync.API.Organization.Resources;
 using JobSync.API.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobSync.API.Organization.Interfaces.Rest.Controllers;
 
 [ApiController]
-[Route("api/v1/enterprise/organizations")]
+[Route("api/v1/enterprise/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[SwaggerTag("Create, read, update and delete Organizations")]
 
 public class OrganizationController : ControllerBase
 {
     private readonly IOrganizationService _organizationService;
     private readonly IMapper _mapper;
     
-    public OrganizationController(IOrganizationService profileService, IMapper mapper)
+    public OrganizationController(IOrganizationService organizationService, IMapper mapper)
     {
-        _organizationService = profileService;
+        _organizationService = organizationService;
         _mapper = mapper;
     }
     
@@ -31,6 +33,20 @@ public class OrganizationController : ControllerBase
         return resources;
     }
     
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(IEnumerable<OrganizationResource>), 200)]
+    [SwaggerOperation(
+        Summary = "Get Organization by Id",
+        Description = "Get Organization by Id",
+        OperationId = "GetOrganizationById")]
+    public async Task<OrganizationResource> GetByIdAsync(int id)
+    {
+        var organization = await _organizationService.FindByIdAsync(id);
+        var resource = _mapper.Map<Domain.Models.Organization, OrganizationResource>(organization);
+        return resource;
+    }
+    
+        
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] OrganizationResource resource)
     {
@@ -45,11 +61,11 @@ public class OrganizationController : ControllerBase
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var profileResource = _mapper.Map<Domain.Models.Organization, OrganizationResource>(result.Resource);
+        var organizationResource = _mapper.Map<Domain.Models.Organization, OrganizationResource>(result.Resource);
 
-        return Created(nameof(PostAsync), profileResource);
+        return Created(nameof(PostAsync), organizationResource);
     }
-    
+        
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] OrganizationResource resource)
     {
@@ -80,5 +96,4 @@ public class OrganizationController : ControllerBase
         var organizationResource = _mapper.Map<Domain.Models.Organization, OrganizationResource>(result.Resource);
         return Ok(organizationResource);
     }
-    
 }

@@ -9,7 +9,6 @@ namespace JobSync.API.Analytics.Interfaces.Rest;
 public class RecruitmentAnalyticsController
 {
     private readonly IRecruitmentAnalyticsService _recruitmentAnalyticsService;
-
     public RecruitmentAnalyticsController(IRecruitmentAnalyticsService recruitmentAnalyticsService)
     {
         _recruitmentAnalyticsService = recruitmentAnalyticsService;
