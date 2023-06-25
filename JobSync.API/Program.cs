@@ -2,6 +2,10 @@ using JobSync.API.Activity.Domain.Repositories;
 using JobSync.API.Activity.Domain.Services;
 using JobSync.API.Activity.Persistence.Repositories;
 using JobSync.API.Activity.Services;
+using JobSync.API.Organization.Domain.Repositories;
+using JobSync.API.Organization.Domain.Services;
+using JobSync.API.Organization.Persistence.Repositories;
+using JobSync.API.Organization.Services;
 using JobSync.API.Security.Domain.Repositories;
 using JobSync.API.Security.Domain.Services;
 using JobSync.API.Security.Persistence.Repositories;
@@ -101,6 +105,11 @@ builder.Services.AddScoped<IPhaseRepository, PhaseRepository>();
 builder.Services.AddScoped<IProcessService, ProcessService>();
 builder.Services.AddScoped<IProcessRepository, ProcessRepository>();
 
+// Enterprise Bounded Context Injection Configuration
+builder.Services.AddScoped<IPlanService, PlanService>();
+builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
 // AutoMapper Configuration
 builder.Services.AddAutoMapper(

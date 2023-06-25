@@ -94,7 +94,7 @@ public class AppDbContext : DbContext
     builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.PhoneNumber).IsRequired().HasMaxLength(16);
     builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.LogoUrl).IsRequired().HasMaxLength(64);
     builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.Address).IsRequired().HasMaxLength(256);
-
+    
     //Plans Configuration
     builder.Entity<Plan>().ToTable("Plans");
     builder.Entity<Plan>().HasKey(pl=>pl.Id);

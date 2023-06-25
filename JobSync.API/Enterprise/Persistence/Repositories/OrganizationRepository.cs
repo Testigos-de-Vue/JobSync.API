@@ -23,7 +23,20 @@ public class OrganizationRepository : BaseRepository, IOrganizationRepository
     
     public async Task<Domain.Models.Organization> FindByIdAsync(int id)
     {
-        return await Context.Organizations.FindAsync(id);
+        return await Context.Organizations
+            .FirstOrDefaultAsync(o => o.Id == id);
+    }
+    
+    public async Task<List<int>> GetProfileIdsByOrganizationId(int organizationId)
+    {
+        var organization = await Context.Organizations
+            .FirstOrDefaultAsync(o => o.Id == organizationId);
+
+        if (organization != null)
+        {
+            return organization.ProfileIds;
+        }
+        return new List<int>(); 
     }
     
     public async Task<Domain.Models.Organization> FindByNameAsync(string name)

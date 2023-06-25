@@ -1,6 +1,7 @@
 ﻿using System.Net.Mime;
 using AutoMapper;
 using JobSync.API.Organization.Domain.Services;
+using JobSync.API.Organization.Domain.Models;
 using JobSync.API.Organization.Resources;
 using JobSync.API.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ public class PlanController : ControllerBase
     public async Task<IEnumerable<PlanResource>> GetAllAsync()
     {
         var plans = await _planService.ListAsync();
-        var resources = _mapper.Map<IEnumerable<Domain.Models.Plan>, IEnumerable<PlanResource>>(plans);
+        var resources = _mapper.Map<IEnumerable<Plan>, IEnumerable<PlanResource>>(plans);
         return resources;
     }
     
@@ -40,14 +41,13 @@ public class PlanController : ControllerBase
             return BadRequest(ModelState.GetErrorMessages());
         }
 
-        var plan = _mapper.Map<PlanResource, Domain.Models.Plan>(resource);
+        var plan = _mapper.Map<PlanResource, Plan>(resource);
         var result = await _planService.SaveAsync(plan);
 
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var planResource = _mapper.Map<Domain.Models.Plan, PlanResource>(result.Resource);
-
+        var planResource = _mapper.Map<Plan, PlanResource>(result.Resource);
         return Created(nameof(PostAsync), planResource);
     }
     
@@ -65,7 +65,7 @@ public class PlanController : ControllerBase
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var planResource = _mapper.Map<Domain.Models.Plan, PlanResource>(result.Resource);
+        var planResource = _mapper.Map<Plan, PlanResource>(result.Resource);
 
         return Ok(planResource);
     }
@@ -78,7 +78,7 @@ public class PlanController : ControllerBase
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var organizationResource = _mapper.Map<Domain.Models.Plan, PlanResource>(result.Resource);
-        return Ok(organizationResource);
+        var planResource = _mapper.Map<Plan, PlanResource>(result.Resource);
+        return Ok(planResource);
     }
 }
