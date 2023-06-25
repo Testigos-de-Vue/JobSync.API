@@ -34,6 +34,14 @@ public class TaskRepository :BaseRepository, ITaskRepository
             .FirstOrDefaultAsync(t => t.Title == title);
     }
     
+    public async Task<IEnumerable<TaskItem>> GetTasksByUserIdAsync(int userId)
+    {
+        return await Context.TaskItems
+            .Where(t => t.UserId == userId)
+            .ToListAsync();
+    }
+
+
     public void Update(TaskItem taskItem)
     {
         Context.TaskItems.Update(taskItem);
