@@ -131,7 +131,7 @@ public class AppDbContext : DbContext
     builder.Entity<Process>()
       .HasMany(p => p.Phases)
       .WithOne(p => p.Process)
-      .HasForeignKey(p => p.RecruitmentProcessId);
+      .HasForeignKey(p => p.ProcessId);
 
     builder.Entity<Organization.Domain.Models.Organization>()
       .HasOne(o => o.OrganizationPlan)

@@ -34,7 +34,7 @@ public class PhaseRepository: BaseRepository, IPhaseRepository
     public async Task<IEnumerable<Phase>> FinByProcessIdAsync(int processId)
     {
         return await Context.Phases
-            .Where(p => p.RecruitmentProcessId == processId)
+            .Where(p => p.ProcessId == processId)
             .Include(p => p.Process)
             .ToListAsync();
     }
