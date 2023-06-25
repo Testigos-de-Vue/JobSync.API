@@ -7,6 +7,7 @@ public interface ITaskRepository
     Task<IEnumerable<TaskItem>> ListAsync(); 
     Task AddAsync(TaskItem taskItem);
     Task<TaskItem> FindByIdAsync(int id);
+    Task<IEnumerable<TaskItem>> GetTasksByUserIdAsync(int userId);
     Task<TaskItem> FindByTitleAsync(string title);
     void Update(TaskItem taskItem);
     void Remove(TaskItem taskItem);
