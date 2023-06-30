@@ -12,6 +12,7 @@ public class User
   public string ImageUrl { get; set; }
   public string PhoneNumber { get; set; }
   public bool IsSubscribedToNewsletter { get; set; }
+  public bool IsRecruiter { get; set; }
 
   [JsonIgnore]
   public string Password { get; set; }
