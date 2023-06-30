@@ -5,12 +5,14 @@ using JobSync.API.Recruitment.Domain.Services;
 using JobSync.API.Recruitment.Resources;
 using JobSync.API.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobSync.API.Recruitment.Interfaces.Rest.Controllers;
 
 [ApiController]
 [Route("api/v1/recruitment/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[SwaggerTag("Create, read, update and delete Recruitment Processes")]
 public class ProcessesController: ControllerBase
 {
     private readonly IProcessService _processService;
@@ -29,6 +31,20 @@ public class ProcessesController: ControllerBase
         var recruitmentProcesses = await _processService.ListAsync();
         var resources = _mapper.Map<IEnumerable<Process>, IEnumerable<ProcessResource>>(recruitmentProcesses);
         return resources;
+    }
+    
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(IEnumerable<ProcessResource>), 200)]
+    [SwaggerOperation(
+        Summary = "Get Recruitment Process by Id",
+        Description = "Get Recruitment Process by Id",
+        OperationId = "GetProcessById",
+        Tags = new []{"Processes"})]
+    public async Task<ProcessResource> GetByIdAsync(int id)
+    {
+        var recruitmentProcess = await _processService.FindByIdAsync(id);
+        var resource = _mapper.Map<Process, ProcessResource>(recruitmentProcess);
+        return resource;
     }
     
     [HttpPost]

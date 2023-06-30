@@ -2,14 +2,25 @@ using JobSync.API.Activity.Domain.Repositories;
 using JobSync.API.Activity.Domain.Services;
 using JobSync.API.Activity.Persistence.Repositories;
 using JobSync.API.Activity.Services;
-using JobSync.API.Authentication.Domain.Repositories;
-using JobSync.API.Authentication.Domain.Services;
-using JobSync.API.Authentication.Persistence.Repositories;
-using JobSync.API.Authentication.Services;
+using JobSync.API.Organization.Domain.Repositories;
+using JobSync.API.Organization.Domain.Services;
+using JobSync.API.Organization.Persistence.Repositories;
+using JobSync.API.Organization.Services;
+using JobSync.API.Security.Domain.Repositories;
+using JobSync.API.Security.Domain.Services;
+using JobSync.API.Security.Persistence.Repositories;
+using JobSync.API.Security.Services;
 using JobSync.API.Profile.Domain.Repositories;
 using JobSync.API.Profile.Domain.Services;
 using JobSync.API.Profile.Persistence.Repositories;
 using JobSync.API.Profile.Services;
+using JobSync.API.Recruitment.Domain.Repositories;
+using JobSync.API.Recruitment.Domain.Services;
+using JobSync.API.Recruitment.Persistence.Repositories;
+using JobSync.API.Recruitment.Services;
+using JobSync.API.Security.Authorization.Handlers.Implementations;
+using JobSync.API.Security.Authorization.Handlers.Interfaces;
+using JobSync.API.Security.Authorization.Settings;
 using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Contexts;
 using JobSync.API.Shared.Persistence.Repositories;
@@ -22,6 +33,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddSwaggerGen(options =>
 {
   options.SwaggerDoc("v1", new OpenApiInfo
@@ -42,6 +54,16 @@ builder.Services.AddSwaggerGen(options =>
     }
   });
   options.EnableAnnotations();
+});
+
+builder.Services.AddCors(options =>
+{
+  options.AddDefaultPolicy(builder =>
+  {
+    builder.AllowAnyOrigin()
+      .AllowAnyMethod()
+      .AllowAnyHeader();
+  });
 });
 
 // Add Database Connection
@@ -68,29 +90,43 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
 // Authentication Bounded Context Injection Configuration
+builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 // Activity Bounded Context Injection Configuration
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
+// Recruitment Bounded Context Injection Configuration
+builder.Services.AddScoped<IPhaseService, PhaseService>();
+builder.Services.AddScoped<IPhaseRepository, PhaseRepository>();
+builder.Services.AddScoped<IProcessService, ProcessService>();
+builder.Services.AddScoped<IProcessRepository, ProcessRepository>();
+
+// Enterprise Bounded Context Injection Configuration
+builder.Services.AddScoped<IPlanService, PlanService>();
+builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+
 // AutoMapper Configuration
 builder.Services.AddAutoMapper(
-  typeof(JobSync.API.Authentication.Mapping.ModelToResourceProfile),
-  typeof(JobSync.API.Authentication.Mapping.ResourceToModelProfile)
+  typeof(JobSync.API.Security.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Security.Mapping.ResourceToModelProfile)
 );
-
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Profile.Mapping.ModelToResourceProfile),
   typeof(JobSync.API.Profile.Mapping.ResourceToModelProfile)
 );
-
 builder.Services.AddAutoMapper(
   typeof(JobSync.API.Activity.Mapping.ModelToResourceProfile),
   typeof(JobSync.API.Activity.Mapping.ResourceToModelProfile)
+);
+builder.Services.AddAutoMapper(
+  typeof(JobSync.API.Recruitment.Mapping.ModelToResourceProfile),
+  typeof(JobSync.API.Recruitment.Mapping.ResourceToModelProfile)
 );
 
 // Application Build
@@ -114,6 +150,13 @@ if (app.Environment.IsDevelopment())
   });
 }
 
+app.UseCors(x => 
+  x.SetIsOriginAllowed(origin => true)
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+);
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -121,3 +164,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Tests
+public partial class Program {}

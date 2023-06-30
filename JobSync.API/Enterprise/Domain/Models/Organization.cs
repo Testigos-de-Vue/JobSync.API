@@ -13,6 +13,7 @@ public class Organization
     
     // Relationships
     public int OrganizationPlanId { get; set; }
+    [NotMapped]    
     public Plan OrganizationPlan { get; set; }
     
     [NotMapped]

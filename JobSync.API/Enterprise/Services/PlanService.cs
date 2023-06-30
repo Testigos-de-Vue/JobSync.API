@@ -48,8 +48,10 @@ public class PlanService : IPlanService
         
         var existingPlanWithTitle = await _planRepository.FindByNameAsync(plan.Name);
 
-        if (existingPlan != null)
+        if (existingPlanWithTitle != null)
             return new PlanResponse("Plan Name is already used");
+        
+        existingPlan.Name = plan.Name;
 
         try
         {

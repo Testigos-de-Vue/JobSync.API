@@ -2,6 +2,7 @@
 using JobSync.API.Recruitment.Domain.Repositories;
 using JobSync.API.Recruitment.Domain.Services;
 using JobSync.API.Recruitment.Domain.Services.Communication;
+using JobSync.API.Shared.Domain.Repositories;
 using JobSync.API.Shared.Persistence.Repositories;
 
 namespace JobSync.API.Recruitment.Services;
@@ -9,10 +10,10 @@ namespace JobSync.API.Recruitment.Services;
 public class PhaseService: IPhaseService
 {
     private readonly IPhaseRepository _phaseRepository;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IProcessRepository _processRepository;
 
-    public PhaseService(IPhaseRepository phaseRepository, UnitOfWork unitOfWork, IProcessRepository processRepository)
+    public PhaseService(IPhaseRepository phaseRepository, IUnitOfWork unitOfWork, IProcessRepository processRepository)
     {
         _phaseRepository = phaseRepository;
         _unitOfWork = unitOfWork;
@@ -47,7 +48,7 @@ public class PhaseService: IPhaseService
             return new PhaseResponse("Recruitment phase not found.");
         
         // Validate if recruitment process exists
-        var existingProcess = await _processRepository.FindByIdAsync(phase.RecruitmentProcessId);
+        var existingProcess = await _processRepository.FindByIdAsync(phase.ProcessId);
         if (existingProcess == null)
             return new PhaseResponse("Invalid recruitment process.");
         
@@ -87,23 +88,8 @@ public class PhaseService: IPhaseService
         }
     }
 
-    public async Task<PhaseResponse> PhaseCountByProcessIdAsync(int processId)
+    public async Task<IEnumerable<Phase>> ListByProcessIdAsync(int processId)
     {
-        // Validate if recruitment process exists
-        var existingProcess = await _processRepository.FindByIdAsync(processId);
-        if (existingProcess == null)
-            return new PhaseResponse("Invalid recruitment process.");
-    
-        try
-        {
-            var phaseCount = _phaseRepository.FinByProcessIdAsync(processId).Result.Count();
-            await _unitOfWork.CompleteAsync();
-
-            return new PhaseResponse(phaseCount.ToString());
-        }
-        catch (Exception e)
-        {
-            return new PhaseResponse($"An error occurred while getting the count of phases in process with id {processId}: {e.Message}.");
-        }
+        return await _phaseRepository.FinByProcessIdAsync(processId);
     }
 }

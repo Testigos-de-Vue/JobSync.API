@@ -1,6 +1,7 @@
 using JobSync.API.Activity.Domain.Models;
-using JobSync.API.Authentication.Domain.Models;
+using JobSync.API.Security.Domain.Models;
 using JobSync.API.Organization.Domain.Models;
+using JobSync.API.Payment.Domain.Models;
 using JobSync.API.Profile.Domain.Models;
 using JobSync.API.Recruitment.Domain.Models;
 using JobSync.API.Shared.Extensions;
@@ -18,6 +19,10 @@ public class AppDbContext : DbContext
   public DbSet<Process> Processes { get; set; }
   
   public DbSet<Plan> Plans { get; set; }
+  
+  public DbSet<Transaction> Transactions { get; set; }
+
+  public DbSet<PaymentPlan> PaymentPlans { get; set; }
   public DbSet<JobSync.API.Organization.Domain.Models.Organization> Organizations { get; set; }
 
   public AppDbContext(DbContextOptions options) : base(options)
@@ -32,11 +37,11 @@ public class AppDbContext : DbContext
     builder.Entity<User>().ToTable("Users");
     builder.Entity<User>().HasKey(u => u.Id);
     builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
-    builder.Entity<User>().Property(u => u.Name).IsRequired().HasMaxLength(32);
+    builder.Entity<User>().Property(u => u.FirstName).IsRequired().HasMaxLength(32);
     builder.Entity<User>().Property(u => u.LastName).IsRequired().HasMaxLength(64);
     builder.Entity<User>().Property(u => u.Email).IsRequired().HasMaxLength(64);
     builder.Entity<User>().Property(u => u.ImageUrl).IsRequired().HasMaxLength(256);
-    builder.Entity<User>().Property(u => u.Password).IsRequired();
+    builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
     builder.Entity<User>().Property(u => u.IsSubscribedToNewsletter).IsRequired();
     builder.Entity<User>().Property(u => u.IsRecruiter).IsRequired();
     builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
@@ -60,11 +65,11 @@ public class AppDbContext : DbContext
     builder.Entity<TaskItem>().Property(t=>t.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<TaskItem>().Property(t=>t.Title).IsRequired().HasMaxLength(64);
     builder.Entity<TaskItem>().Property(t=>t.Description).IsRequired().HasMaxLength(256);
-    builder.Entity<TaskItem>().Property(t=>t.Date).IsRequired();
+    builder.Entity<TaskItem>().Property(t=>t.Time).IsRequired();
     builder.Entity<TaskItem>().Property(t=>t.Status).IsRequired();
 
     // RecruitmentPhases Configuration
-    builder.Entity<Phase>().ToTable("RecruitmentPhases");
+    builder.Entity<Phase>().ToTable("Phases");
     builder.Entity<Phase>().HasKey(p=>p.Id);
     builder.Entity<Phase>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<Phase>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
@@ -72,7 +77,7 @@ public class AppDbContext : DbContext
     builder.Entity<Phase>().Property(p=>p.CreatedDate).IsRequired();
     
     // RecruitmentProcesses Configuration
-    builder.Entity<Process>().ToTable("RecruitmentProcesses");
+    builder.Entity<Process>().ToTable("Processes");
     builder.Entity<Process>().HasKey(p=>p.Id);
     builder.Entity<Process>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<Process>().Property(p=>p.Name).IsRequired().HasMaxLength(64);
@@ -90,12 +95,28 @@ public class AppDbContext : DbContext
     builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.PhoneNumber).IsRequired().HasMaxLength(16);
     builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.LogoUrl).IsRequired().HasMaxLength(64);
     builder.Entity<Organization.Domain.Models.Organization>().Property(o=>o.Address).IsRequired().HasMaxLength(256);
-
+    
     //Plans Configuration
     builder.Entity<Plan>().ToTable("Plans");
     builder.Entity<Plan>().HasKey(pl=>pl.Id);
     builder.Entity<Plan>().Property(pl=>pl.Id).IsRequired().ValueGeneratedOnAdd();
     builder.Entity<Plan>().Property(pl=>pl.Name).IsRequired().HasMaxLength(64);
+    
+    //Pays Configutation
+    builder.Entity<Transaction>().ToTable("Transactions");
+    builder.Entity<Transaction>().HasKey(p => p.id);
+    builder.Entity<Transaction>().Property(p => p.id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<Transaction>().Property(p => p.mount).IsRequired();
+    builder.Entity<Transaction>().Property(p => p.currency).IsRequired().HasMaxLength(12);
+    
+    //Payment Plans Configuration
+    builder.Entity<PaymentPlan>().ToTable("PaymentPlans");
+    builder.Entity<PaymentPlan>().HasKey(p => p.id);
+    builder.Entity<PaymentPlan>().Property(p=>p.id).IsRequired().ValueGeneratedOnAdd();
+    builder.Entity<PaymentPlan>().Property(p => p.name).IsRequired().HasMaxLength(30);
+    builder.Entity<PaymentPlan>().Property(p => p.initialPrice).IsRequired();
+    builder.Entity<PaymentPlan>().Property(p => p.interest).IsRequired();
+    builder.Entity<PaymentPlan>().Property(p => p.lapse).IsRequired();
     
     // Relationships
     builder.Entity<JobSync.API.Profile.Domain.Models.Profile>()
@@ -111,7 +132,7 @@ public class AppDbContext : DbContext
     builder.Entity<Process>()
       .HasMany(p => p.Phases)
       .WithOne(p => p.Process)
-      .HasForeignKey(p => p.RecruitmentProcessId);
+      .HasForeignKey(p => p.ProcessId);
 
     builder.Entity<Organization.Domain.Models.Organization>()
       .HasOne(o => o.OrganizationPlan)

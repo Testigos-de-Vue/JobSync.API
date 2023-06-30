@@ -22,6 +22,11 @@ public class ProcessService: IProcessService
         return await _processRepository.ListAsync();
     }
 
+    public Task<Process> FindByIdAsync(int id)
+    {
+        return _processRepository.FindByIdAsync(id);
+    }
+
     public async Task<ProcessResponse> SaveAsync(Process process)
     {
         try

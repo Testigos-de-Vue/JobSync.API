@@ -6,6 +6,7 @@ namespace JobSync.API.Recruitment.Domain.Services;
 public interface IProcessService
 {
     Task<IEnumerable<Process>> ListAsync();
+    Task<Process> FindByIdAsync(int id);
     Task<ProcessResponse> SaveAsync(Process process);
     Task<ProcessResponse> UpdateAsync(int id, Process process);
     Task<ProcessResponse> DeleteAsync(int id);
