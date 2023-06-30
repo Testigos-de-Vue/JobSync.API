@@ -43,6 +43,7 @@ public class AppDbContext : DbContext
     builder.Entity<User>().Property(u => u.ImageUrl).IsRequired().HasMaxLength(256);
     builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
     builder.Entity<User>().Property(u => u.IsSubscribedToNewsletter).IsRequired();
+    builder.Entity<User>().Property(u => u.IsRecruiter).IsRequired();
     builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
     
     // Roles Configuration
